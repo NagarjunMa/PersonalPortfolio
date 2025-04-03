@@ -1,9 +1,22 @@
 @import "tailwindcss";
 
 
+
+
+/* Add these color variables to your global CSS */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background: #064141B;
+  --color-background-alt: #11212D;
+  --color-surface: #253745;
+  --color-accent: #4a5c6a;
+  --color-text-secondary: #9ba8ab;
+  --color-text-primary: #ccd0cf;
+}
+
+/* Dark theme defaults */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 @theme inline {
@@ -18,10 +31,4 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  background-color: #081C29;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
 }

@@ -1,49 +1,54 @@
 "use client"
 
-import { useEffect, useState, createContext, useContext } from "react";
-import Lenis from "@studio-freight/lenis";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react"
+import Lenis from "@studio-freight/lenis"
 
-// Use proper typing for the context
-const SmoothScrollContext = createContext<Lenis | null>(null);
-export const useSmoothScroll = () => useContext(SmoothScrollContext);
+// Create a more specific type for the Lenis instance
+type LenisInstance = any;
 
-export default function ScrollProvider({ children }: { children: React.ReactNode }) {
-    const [lenis, setLenis] = useState<Lenis | null>(null);
+// Create context with null as default value
+const SmoothScrollContext = createContext<LenisInstance | null>(null)
+
+// Custom hook to use the scroll context
+export const useSmoothScroll = () => useContext(SmoothScrollContext)
+
+// Props type for the provider
+interface SmoothScrollProviderProps {
+    children: ReactNode;
+}
+
+// Provider component
+export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+    const [lenis, setLenis] = useState<LenisInstance | null>(null)
 
     useEffect(() => {
-        // Initialize Lenis with correct type options
         const lenisInstance = new Lenis({
             duration: 1.2,
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            // Remove 'direction' property if not in the type
-            // direction: 'vertical', - removed
-            gestureOrientation: 'vertical',
-            smoothWheel: true, // Use this instead of 'gestureDirection'
+            smoothWheel: true,
+            wheelMultiplier: 1,
             touchMultiplier: 2,
-        });
+            infinite: false,
+        })
 
-        // Setup the animation frame
         function raf(time: number) {
-            lenisInstance.raf(time);
-            requestAnimationFrame(raf);
+            lenisInstance.raf(time)
+            requestAnimationFrame(raf)
         }
 
-        const animationFrame = requestAnimationFrame(raf);
+        const animationFrame = requestAnimationFrame(raf)
 
-        // Store the Lenis instance
-        setLenis(lenisInstance);
+        setLenis(lenisInstance)
 
-        // Cleanup function
         return () => {
-            cancelAnimationFrame(animationFrame);
-            lenisInstance.destroy();
-        };
-    }, []);
+            cancelAnimationFrame(animationFrame)
+            lenisInstance.destroy()
+        }
+    }, [])
 
-    // Fix JSX syntax error - remove spaces around braces
     return (
         <SmoothScrollContext.Provider value={lenis}>
             {children}
         </SmoothScrollContext.Provider>
-    );
+    )
 }
