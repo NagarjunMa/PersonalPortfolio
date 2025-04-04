@@ -88,7 +88,7 @@ const Introduction = () => {
                     {/* Main heading with 3D effect and glow */}
                     <h1
                         ref={headingRef}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 name-3d glow-effect"
+                        className="font-monoton text-4xl md:text-5xl lg:text-6xl font-bold mb-4 name-3d glow-effect"
                         style={{
                             color: '#ccd0cf', // Primary text color
                             transformOrigin: 'center center',
@@ -100,7 +100,7 @@ const Introduction = () => {
 
                     <h2
                         ref={subHeadingRef}
-                        className="text-xl md:text-2xl font-medium mb-10 subtitle-3d glow-effect-subtle"
+                        className="font-montserrat text-xl md:text-2xl font-medium mb-10 subtitle-3d glow-effect-subtle"
                         style={{
                             color: '#9ba8ab', // Secondary text color
                             transformOrigin: 'center center',

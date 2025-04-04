@@ -1,9 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Raleway, Montserrat, Geist, Geist_Mono, Monoton } from "next/font/google";
 import "./globals.css";
 import { Fraunces } from "next/font/google";
-import Header from "./components/Header";
 import ScrollProvider from "./providers/lenis-provider";
+import NavBar from "./components/NavBar";
+
+
+export const monoton = Monoton({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-monoton',
+});
+
+// Load the fonts
+const raleway = Raleway({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-raleway',
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +55,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased bg-[#081C29] text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${raleway.variable} ${montserrat.variable} ${monoton.variable} antialiased bg-[#081C29] text-white`}
+        suppressHydrationWarning={true}
       >
-        <Header />
+        <NavBar />
         <ScrollProvider>
           {children}
         </ScrollProvider>

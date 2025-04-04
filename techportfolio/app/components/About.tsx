@@ -3,13 +3,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSmoothScroll } from '../providers/lenis-provider'
 import Image from 'next/image'
-import { FaFileDownload } from 'react-icons/fa'
 
 const About = () => {
     const sectionRef = useRef<HTMLDivElement>(null)
     const headingRef = useRef<HTMLHeadingElement>(null)
-    const leftColumnRef = useRef<HTMLDivElement>(null)
-    const rightColumnRef = useRef<HTMLDivElement>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
     const [scrollProgress, setScrollProgress] = useState(0)
     const [sectionProgress, setSectionProgress] = useState(0)
     const [isVisible, setIsVisible] = useState(false)
@@ -83,7 +81,7 @@ const About = () => {
 
     // Apply scale effects based on scroll position - similar to Introduction component
     useEffect(() => {
-        if (!headingRef.current) return;
+        if (!headingRef.current || !isClient) return;
 
         // Base size is 4.5rem, max size is 8rem
         const fontSize = 4.5 + (scrollProgress * 3.5) // Scale from 8rem down to 4.5rem
@@ -94,27 +92,22 @@ const About = () => {
 
         // Keep opacity at full when in view
         headingRef.current.style.opacity = isVisible ? "1" : `${0.5 + scrollProgress * 0.5}`
-    }, [scrollProgress, isVisible])
+    }, [scrollProgress, isVisible, isClient])
 
-    // Apply column animations based on section progress
+    // Apply animations based on section progress
     useEffect(() => {
-        if (!leftColumnRef.current || !rightColumnRef.current) return;
+        if (!contentRef.current || !isClient) return;
 
-        // Transform columns based on section progress
-        // Max movement: 100px from each side
-        const leftX = -100 + (sectionProgress * 100)
-        const rightX = 100 - (sectionProgress * 100)
+        // Transform from initial position to final position
+        const x = -100 + (sectionProgress * 100)
 
         // Opacity: 0 when not in view, up to 1 when fully in view
         const opacity = sectionProgress
 
         // Apply transformations
-        leftColumnRef.current.style.transform = `translateX(${leftX}px)`
-        leftColumnRef.current.style.opacity = `${opacity}`
-
-        rightColumnRef.current.style.transform = `translateX(${rightX}px)`
-        rightColumnRef.current.style.opacity = `${opacity}`
-    }, [sectionProgress])
+        contentRef.current.style.transform = `translateX(${x}px)`
+        contentRef.current.style.opacity = `${opacity}`
+    }, [sectionProgress, isClient])
 
     return (
         <div
@@ -131,9 +124,9 @@ const About = () => {
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <h2
                     ref={headingRef}
-                    className="font-bold text-center mb-6 md:mb-10 lg:mb-12 transition-all duration-300"
+                    className="font-fraunces font-bold text-center mb-6 md:mb-10 lg:mb-12 transition-all duration-300"
                     style={{
-                        fontSize: '8rem', // Start large (will be overridden by JS)
+                        fontSize: '4.5rem', // Start with base size for SSR
                         color: '#ccd0cf',
                         textShadow: `
                             0 0 5px rgba(204, 208, 207, 0.3),
@@ -152,73 +145,38 @@ const About = () => {
                 <div
                     className="max-w-5xl mx-auto backdrop-blur-sm bg-[#253745]/30 rounded-xl overflow-hidden shadow-xl"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                        {/* Left Column - Image - Direct style control */}
+                    <div className="p-5 md:p-6 lg:p-8">
+                        {/* Content with image and text */}
                         <div
-                            ref={leftColumnRef}
-                            className="flex justify-center items-center bg-[#064141B]/40 p-5 md:p-6 lg:p-8"
+                            ref={contentRef}
+                            className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-10 max-w-3xl mx-auto"
                             style={{
-                                transform: 'translateX(-100px)', // Initial position, will be updated by JS
-                                opacity: 0, // Initial opacity, will be updated by JS
-                                transition: 'transform 0.3s ease-out, opacity 0.3s ease-out',
-                                willChange: 'transform, opacity'
+                                opacity: isClient ? 0 : 1, // Set initial opacity based on client state
+                                transform: 'translateX(0px)', // Start centered for SSR
                             }}
                         >
-                            <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-lg shadow-xl">
+                            <div className="relative w-48 h-64 md:w-56 md:h-72 lg:w-64 lg:h-80 overflow-hidden rounded-lg shadow-xl flex-shrink-0">
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#064141B]/90 via-[#11212D]/30 to-transparent z-10"></div>
                                 <Image
                                     src="/images/profilepicture/nagarjun.jpg"
                                     alt="Nagarjun Mallesh"
                                     fill
                                     className="object-cover"
-                                    sizes="(max-width: 768px) 90vw, 35vw"
+                                    sizes="(max-width: 768px) 12rem, 16rem"
                                     priority
                                 />
                             </div>
-                        </div>
 
-                        {/* Right Column - Text - Direct style control */}
-                        <div
-                            ref={rightColumnRef}
-                            className="flex flex-col justify-center p-5 md:p-6 lg:p-8"
-                            style={{
-                                transform: 'translateX(100px)', // Initial position, will be updated by JS
-                                opacity: 0, // Initial opacity, will be updated by JS
-                                transition: 'transform 0.3s ease-out, opacity 0.3s ease-out',
-                                willChange: 'transform, opacity'
-                            }}
-                        >
-                            <div className="h-full">
-                                <p
-                                    className="text-[#ccd0cf] mb-5 leading-relaxed text-lg"
-                                >
-                                    I&apos;m a fullstack engineer with a passion for building scalable web applications
-                                    and solving complex problems. With expertise in modern JavaScript frameworks,
-                                    cloud architecture, and database design, I create robust solutions that deliver
-                                    exceptional user experiences.
+                            {/* Description beside image on desktop, below on mobile */}
+                            <div className="flex-1 max-w-md">
+                                <p className="text-[#ccd0cf] font-geist-mono mb-4 leading-relaxed text-lg">
+                                    I&apos;m a passionate Full Stack Developer with 3+ years of experience building scalable
+                                    applications. My expertise spans React, Node.js, and cloud infrastructure with AWS.
                                 </p>
-
-                                <p
-                                    className="text-[#9ba8ab] mb-6 leading-relaxed text-lg"
-                                >
-                                    My experience spans from frontend development with React and Next.js to
-                                    backend systems using Node.js, Python, and cloud services. I&apos;m committed
-                                    to writing clean, maintainable code and continuously learning new technologies.
+                                <p className="text-[#9ba8ab] font-geist-mono leading-relaxed text-lg">
+                                    I love solving complex problems and am always eager to learn and implement new technologies
+                                    that push the boundaries of what&apos;s possible.
                                 </p>
-
-                                {/* CV Download Button - Centered */}
-                                <div
-                                    className="flex justify-center mt-6"
-                                >
-                                    <a
-                                        href="/resume/nagarjun_mallesh_resume.pdf"
-                                        download
-                                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#064141B] hover:bg-[#064141B]/80 text-[#ccd0cf] rounded-lg transition-colors shadow-lg"
-                                    >
-                                        <FaFileDownload className="text-lg" />
-                                        <span>Download Resume</span>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
