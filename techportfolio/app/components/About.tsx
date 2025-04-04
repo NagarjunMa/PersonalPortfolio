@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react'
@@ -23,7 +25,7 @@ const About = () => {
     useEffect(() => {
         if (!isClient || !lenis || !sectionRef.current) return;
 
-        const handleScroll = (e: any) => {
+        const handleScroll = (e : any) => {
             // Get section position
             const rect = sectionRef.current!.getBoundingClientRect()
             const windowHeight = window.innerHeight

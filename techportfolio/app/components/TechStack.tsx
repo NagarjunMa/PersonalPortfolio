@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react'
@@ -5,7 +7,7 @@ import { useSmoothScroll } from '../providers/lenis-provider'
 import { AnimatePresence } from "motion/react"
 import * as motion from "motion/react-client"
 import {
-    FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaDocker, FaPython, FaGithub, FaServer, FaGoogle, FaAws,
+    FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaDocker, FaPython, FaGithub, FaGoogle, FaAws,
     FaJava
 } from "react-icons/fa"
 import { SiTypescript, SiNextdotjs, SiMongodb, SiPostgresql, SiMysql, SiFirebase, SiTerraform, SiGo } from "react-icons/si"

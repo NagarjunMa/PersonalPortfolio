@@ -21,8 +21,14 @@ export async function GET() {
             console.error('Unexpected API response structure:', data);
             return NextResponse.json([]);
         }
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('API route error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+
+        // Safe error handling with proper type checking
+        const errorMessage = error instanceof Error
+            ? error.message
+            : 'Unknown error occurred';
+
+        return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 }

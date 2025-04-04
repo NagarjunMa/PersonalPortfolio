@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import React, { useEffect, useState, useRef } from 'react';
@@ -8,7 +10,7 @@ import { useSmoothScroll } from '../providers/lenis-provider';
 export default function BlogSection() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
 
     // Animation variants
     const fadeInVariants = {
@@ -144,7 +146,7 @@ export default function BlogSection() {
                 const data = await response.json();
 
                 // Process the data to ensure it has the right format
-                const processedArticles = data.map(article => ({
+                const processedArticles = data.map((article: { title: any; description: string; thumbnail: any; pubDate: string | number | Date; link: any; categories: any; }) => ({
                     title: article.title,
                     description: article.description
                         ? article.description.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...'
@@ -164,10 +166,15 @@ export default function BlogSection() {
                     setLoading(false);
                 }
 
-            } catch (err) {
+            } catch (err: unknown) {
                 console.error("Error fetching blog posts:", err);
                 if (isMounted) {
-                    setError(err.message);
+                    // Safely handle the unknown error type to get a proper message
+                    const errorMessage = err instanceof Error
+                        ? err.message
+                        : 'Unknown error occurred while fetching blog posts';
+
+                    setError(errorMessage);
                     setLoading(false);
                 }
             }
