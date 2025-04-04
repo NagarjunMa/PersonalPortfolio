@@ -6,7 +6,7 @@ import ScrollProvider from "./providers/lenis-provider";
 import NavBar from "./components/NavBar";
 
 
-export const monoton = Monoton({
+const monoton = Monoton({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
