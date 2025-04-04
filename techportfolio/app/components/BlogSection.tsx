@@ -11,6 +11,7 @@ export default function BlogSection() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
 
     // Animation variants
     const fadeInVariants = {
@@ -24,112 +25,45 @@ export default function BlogSection() {
         }
     };
 
-    // Smooth scroll references and state
+    // Simplified refs and state
     const sectionRef = useRef<HTMLElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
-    const [scrollProgress, setScrollProgress] = useState(0);
-    const [sectionProgress, setSectionProgress] = useState(0);
-    const [isVisible, setIsVisible] = useState(false);
     const [isClient, setIsClient] = useState(false);
     const lenis = useSmoothScroll();
 
-    // Use inView for animations on elements that don't need custom scroll effects
+    // Use inView for animations with once:true to ensure animation only happens once
     const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" });
 
     // Run once on mount to indicate we're on the client
     useEffect(() => {
         setIsClient(true);
+
+        // Add/remove ID for better navigation targeting
+        const section = sectionRef.current;
+        if (section) {
+            // Ensure the section has a proper ID for navigation
+            section.id = "blog";
+
+            // Fix for navigation glitch: ensure section is navigable
+            if (typeof window !== 'undefined') {
+                // Check if there's a hash in the URL that matches this section
+                if (window.location.hash === '#blog') {
+                    // Use setTimeout to ensure this runs after other initialization
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }, 200);
+                }
+            }
+        }
     }, []);
 
-    // Handle scroll events with Lenis
+    // SIMPLIFIED: Track when content becomes visible
     useEffect(() => {
-        if (!isClient || !lenis || !sectionRef.current) return;
-
-        const handleScroll = (e: any) => {
-            // Get section position
-            const rect = sectionRef.current!.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            // Calculate overall scroll progress for heading size
-            if (rect.top < windowHeight && rect.bottom > 0) {
-                setIsVisible(true);
-
-                // This creates a value from 1 (when section first enters view) to 0 (when it's centered)
-                const headingProgress = Math.max(0, Math.min(1,
-                    (rect.top > 0)
-                        ? rect.top / (windowHeight * 0.5)
-                        : 0
-                ));
-                setScrollProgress(headingProgress);
-
-                // Calculate how far through the section we are
-                const viewportCenter = windowHeight / 2;
-                const sectionCenter = rect.top + (rect.height / 2);
-
-                // Create a progress value from 0 (section entering) to 1 (section centered) to 0 (section leaving)
-                let progress;
-
-                if (sectionCenter > viewportCenter) {
-                    // Section is entering (top half of screen)
-                    progress = 1 - Math.min(1, Math.max(0,
-                        (sectionCenter - viewportCenter) / (windowHeight * 0.75)
-                    ));
-                } else {
-                    // Section is leaving (bottom half of screen)
-                    progress = 1 - Math.min(1, Math.max(0,
-                        (viewportCenter - sectionCenter) / (windowHeight * 0.75)
-                    ));
-                }
-
-                setSectionProgress(progress);
-            } else {
-                setIsVisible(false);
-                setSectionProgress(0);
-                setScrollProgress(rect.top < 0 ? 0 : 1); // Ensure proper heading size
-            }
-        };
-
-        // Subscribe to Lenis scroll events
-        lenis.on('scroll', handleScroll);
-
-        // Initial check
-        handleScroll({ scroll: window.scrollY });
-
-        return () => {
-            lenis.off('scroll', handleScroll);
-        };
-    }, [isClient, lenis]);
-
-    // Apply scale effects based on scroll position
-    useEffect(() => {
-        if (!headingRef.current || !isClient) return;
-
-        // Base size is 4.5rem, max size is 8rem
-        const fontSize = 4.5 + (scrollProgress * 3.5); // Scale from 8rem down to 4.5rem
-        headingRef.current.style.fontSize = `${fontSize}rem`;
-
-        // Adjust line height to accommodate larger font
-        headingRef.current.style.lineHeight = "1";
-
-        // Keep opacity at full when in view
-        headingRef.current.style.opacity = isVisible ? "1" : `${0.5 + scrollProgress * 0.5}`;
-    }, [scrollProgress, isVisible, isClient]);
-
-    // Apply animations based on section progress
-    useEffect(() => {
-        if (!contentRef.current || !isClient) return;
-
-        // Transform from initial position to final position
-        const x = -50 + (sectionProgress * 50); // Reduced movement for subtlety
-
-        // Opacity: 0 when not in view, up to 1 when fully in view
-        const opacity = sectionProgress;
-
-        // Apply transformations
-        contentRef.current.style.transform = `translateX(${x}px)`;
-        contentRef.current.style.opacity = `${opacity}`;
-    }, [sectionProgress, isClient]);
+        if (isInView && !hasAnimated) {
+            setHasAnimated(true);
+        }
+    }, [isInView, hasAnimated]);
 
     // Fetch blog articles
     useEffect(() => {
@@ -187,6 +121,31 @@ export default function BlogSection() {
         };
     }, []);
 
+    // Listen for navigation events to help fix glitches
+    useEffect(() => {
+        if (!lenis || !sectionRef.current) return;
+
+        // Function to scroll to this section if clicking the blog nav link
+        const handleHashChange = () => {
+            if (window.location.hash === '#blog' && sectionRef.current) {
+                // Reset lenis scroll position to ensure reliable navigation
+                lenis.scrollTo(sectionRef.current, {
+                    offset: 0,
+                    immediate: false,
+                    duration: 1.2,
+                    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+            }
+        };
+
+        // Listen for hash changes in URL
+        window.addEventListener('hashchange', handleHashChange);
+
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange);
+        };
+    }, [lenis]);
+
     return (
         <section
             id="blog"
@@ -198,52 +157,41 @@ export default function BlogSection() {
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
                 <div
                     className="absolute -left-64 top-1/4 w-[500px] h-[500px] rounded-full bg-[#00C2FF]/5 filter blur-[120px]"
-                    data-scroll
-                    data-scroll-speed="0.3"
                 ></div>
                 <div
                     className="absolute -right-64 bottom-1/4 w-[400px] h-[400px] rounded-full bg-[#064141]/5 filter blur-[100px]"
-                    data-scroll
-                    data-scroll-speed="0.5"
                 ></div>
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
-                {/* Section heading with dynamic scaling */}
-                <div className="text-center mb-8">
+                {/* Section heading with fade-in only */}
+                <motion.div
+                    className="text-center mb-12 md:mb-16"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView || hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                >
                     <h2
                         ref={headingRef}
-                        className="font-fraunces font-bold text-center mb-6 md:mb-10 lg:mb-12 mx-auto transition-all duration-300"
+                        className="font-fraunces font-bold text-center mb-6 text-[4.5rem] text-[#ccd0cf] relative"
                         style={{
-                            fontSize: '4.5rem', // Start with base size for SSR
-                            color: '#ccd0cf',
                             textShadow: `
                                 0 0 5px rgba(204, 208, 207, 0.3),
                                 0 0 10px rgba(204, 208, 207, 0.2),
                                 0 0 15px rgba(204, 208, 207, 0.1)
                             `,
-                            transformOrigin: 'center center',
                             lineHeight: '1',
-                            transition: 'all 0.3s ease',
-                            willChange: 'transform, opacity, font-size'
                         }}
-                        data-scroll
-                        data-scroll-speed="0.1"
                     >
                         Blog
                     </h2>
-                </div>
+                    <p className="font-raleway text-[#9BA8AB] max-w-2xl mx-auto text-base md:text-lg">
+                        Thoughts, insights, and tutorials from my journey in software engineering and cloud architecture.
+                    </p>
+                </motion.div>
 
-                {/* Content area with scroll-based animation */}
-                <div
-                    ref={contentRef}
-                    className="transition-all duration-300"
-                    style={{
-                        opacity: isClient ? 0 : 1, // Start invisible on client, visible on server
-                        transform: 'translateX(-50px)', // Initial offset position
-                        willChange: 'transform, opacity'
-                    }}
-                >
+                {/* Content area - No animations or scroll effects */}
+                <div ref={contentRef} className="transition-all duration-300">
                     {/* Loading state */}
                     {loading && (
                         <div className="flex flex-col items-center justify-center py-16">
@@ -278,35 +226,19 @@ export default function BlogSection() {
                         </div>
                     )}
 
-                    {/* Articles grid */}
+                    {/* Articles grid - NO SMOOTH SCROLLING EFFECTS */}
                     {!loading && !error && articles && articles.length > 0 && (
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                                 {articles.slice(0, 6).map((article, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial="hidden"
-                                        animate={isInView ? "visible" : "hidden"}
-                                        variants={fadeInVariants}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="h-full"
-                                        data-scroll
-                                        data-scroll-speed={0.05 * (index % 3 + 1)}
-                                    >
+                                    <div key={index} className="h-full">
                                         <BlogCard article={article} />
-                                    </motion.div>
+                                    </div>
                                 ))}
                             </div>
 
                             {/* View all link */}
-                            <motion.div
-                                className="mt-7 md:mt-10 text-center"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                                transition={{ delay: 0.8, duration: 0.5 }}
-                                data-scroll
-                                data-scroll-speed="0.2"
-                            >
+                            <div className="mt-10 md:mt-12 text-center">
                                 <a
                                     href="https://medium.com/@nagarjunmallesh"
                                     target="_blank"
@@ -318,7 +250,7 @@ export default function BlogSection() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                     </svg>
                                 </a>
-                            </motion.div>
+                            </div>
                         </>
                     )}
                 </div>

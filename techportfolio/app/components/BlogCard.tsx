@@ -118,7 +118,7 @@ const BlogCard = ({ article }: { article: ArticleProps }) => {
                             href={safeArticle.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-montserrat px-4 py-2 rounded-md text-sm font-medium transition-all transform hover:translate-y-[-2px] bg-[#00C2FF] text-[#061418]"
+                            className="font-montserrat px-2 py-2 rounded-md text-sm font-medium transition-all transform hover:translate-y-[-2px] bg-[#00C2FF] text-[#061418]"
                         >
                             Read More
                         </Link>

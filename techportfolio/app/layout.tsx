@@ -4,6 +4,7 @@ import "./globals.css";
 import { Fraunces } from "next/font/google";
 import ScrollProvider from "./providers/lenis-provider";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 
 const monoton = Monoton({
@@ -62,6 +63,7 @@ export default function RootLayout({
         <ScrollProvider>
           {children}
         </ScrollProvider>
+        <Footer />
 
       </body>
     </html>

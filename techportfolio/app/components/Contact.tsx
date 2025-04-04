@@ -96,6 +96,7 @@ const Contact = () => {
         e.preventDefault();
         setSending(true);
 
+        console.log('Form submitted:', formData.name, 'form data email : ', formData.email, 'form data subject : ', formData.subject, 'form data message : ', formData.message);
         // Simulate sending (replace with your actual form submission logic)
         await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -159,8 +160,8 @@ const Contact = () => {
                         </h2>
 
                         {/* Decorative elements - Moved to left side */}
-                        <div className="absolute -left-16 -top-8 w-32 h-32 md:w-40 md:h-40 rounded-full bg-[#00C2FF]/10 filter blur-xl z-10"></div>
-                        <div className="absolute -left-4 -top-4 w-20 h-20 md:w-24 md:h-24 rounded-full border border-[#00C2FF]/30 z-10"></div>
+                        <div className="absolute -left-20 -top-50 w-52 h-52 md:w-65 md:h-65 rounded-full bg-[#00C2FF]/10 filter blur-xl z-10"></div>
+                        <div className="absolute -left-20 -top-45 w-50 h-50 md:w-54 md:h-54 rounded-full border border-[#00C2FF]/30 z-10"></div>
                     </div>
 
                     {/* Main form card with glowing border */}
@@ -168,97 +169,7 @@ const Contact = () => {
                         {/* Glow effect */}
                         <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-[#00C2FF30] via-[#064141B70] to-[#253745B50] opacity-75 blur-[3px] z-0"></div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-[#0f1923] p-6 md:p-10 rounded-xl border border-[#1e2a36] shadow-xl relative z-10"
-                        >
-                            {sent ? (
-                                <div className="text-center py-8">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <h3 className="text-xl font-medium mb-2 text-[#ccd0cf]">
-                                        Message Sent!
-                                    </h3>
-                                    <p className="text-[#9BA8AB]">Thank you for your message. I&apos;ll get back to you soon.</p>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-[#9BA8AB]">
-                                                Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="name"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleChange}
-                                                required
-                                                className="w-full px-4 py-3 rounded-md bg-[#1e2a36] border border-[#2a3947] focus:border-[#00C2FF] focus:outline-none transition-colors text-[#CCDCCF]"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-[#9BA8AB]">
-                                                Email
-                                            </label>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                                required
-                                                className="w-full px-4 py-3 rounded-md bg-[#1e2a36] border border-[#2a3947] focus:border-[#00C2FF] focus:outline-none transition-colors text-[#CCDCCF]"
-                                            />
-                                        </div>
-                                    </div>
 
-                                    <div>
-                                        <label htmlFor="subject" className="block mb-2 text-sm font-medium text-[#9BA8AB]">
-                                            Subject
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="subject"
-                                            name="subject"
-                                            value={formData.subject}
-                                            onChange={handleChange}
-                                            required
-                                            className="w-full px-4 py-3 rounded-md bg-[#1e2a36] border border-[#2a3947] focus:border-[#00C2FF] focus:outline-none transition-colors text-[#CCDCCF]"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-[#9BA8AB]">
-                                            Message
-                                        </label>
-                                        <textarea
-                                            id="message"
-                                            name="message"
-                                            value={formData.message}
-                                            onChange={handleChange}
-                                            required
-                                            rows={6}
-                                            className="w-full px-4 py-3 rounded-md bg-[#1e2a36] border border-[#2a3947] focus:border-[#00C2FF] focus:outline-none transition-colors text-[#CCDCCF]"
-                                        />
-                                    </div>
-
-                                    <div className="flex justify-end">
-                                        <button
-                                            type="submit"
-                                            disabled={sending}
-                                            className="px-8 py-3 rounded-md bg-[#00C2FF] text-[#061418] font-medium transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-[#00C2FF]/20 disabled:opacity-70 disabled:transform-none"
-                                        >
-                                            {sending ? 'Sending...' : 'Send Message'}
-                                        </button>
-                                    </div>
-                                </form>
-                            )}
-                        </motion.div>
                     </div>
 
                     {/* Alternative contact methods */}
