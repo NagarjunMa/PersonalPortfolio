@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
 import { SparklesIcon, CubeIcon, ShieldCheckIcon, DocumentTextIcon, EnvelopeIcon } from "@heroicons/react/24/solid"
+import Image from 'next/image'
 
 const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
@@ -94,7 +95,7 @@ const NavBar = () => {
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     >
-                        <img src="/Logo/1.png" alt="Logo" className="w-8 h-8 object-contain mr-3 rounded-lg" />
+                        <Image src="/Logo/1.png" alt="Nagarjun Mallesh Logo" width={32} height={32} className="object-contain mr-3 rounded-lg" />
                         <h1 className="text-xl font-stardom text-white">
                             Nagarjun Mallesh
                         </h1>

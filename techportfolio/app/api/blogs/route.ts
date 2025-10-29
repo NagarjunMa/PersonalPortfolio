@@ -28,7 +28,14 @@ export async function GET() {
         }
 
         // Transform the data to match our expected format
-        const items = data.items.map((item: any) => {
+        const items = data.items.map((item: {
+            thumbnail?: string;
+            description?: string;
+            title?: string;
+            link?: string;
+            pubDate?: string;
+            categories?: string[];
+        }) => {
             // Extract thumbnail from content or use author's image
             let thumbnail = item.thumbnail || null
 
@@ -51,8 +58,9 @@ export async function GET() {
         })
 
         return NextResponse.json(items)
-    } catch (err: any) {
+    } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error'
         console.error('Error fetching Medium posts:', err)
-        return NextResponse.json({ error: err?.message || 'Unknown error' }, { status: 500 })
+        return NextResponse.json({ error: errorMessage }, { status: 500 })
     }
 }

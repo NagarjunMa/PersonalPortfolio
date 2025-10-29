@@ -2,7 +2,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react"
-import Lenis from "lenis"
+import Lenis from "@studio-freight/lenis"
 
 // Create a more specific type for the Lenis instance
 type LenisInstance = any;
