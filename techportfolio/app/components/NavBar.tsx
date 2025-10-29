@@ -58,8 +58,6 @@ const NavBar = () => {
 
     // Smooth scroll to section with standard browser APIs
     const scrollToSection = (sectionId: string) => {
-        console.log(`Scrolling to section: ${sectionId}`);
-
         const element = document.getElementById(sectionId);
 
         if (element) {
@@ -68,8 +66,6 @@ const NavBar = () => {
                 behavior: 'smooth',
                 block: 'start',
             });
-        } else {
-            console.warn(`Element with id "${sectionId}" not found`);
         }
 
         // Close mobile menu after clicking

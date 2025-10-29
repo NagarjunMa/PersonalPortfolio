@@ -97,7 +97,6 @@ const Contact = () => {
         e.preventDefault();
         setSending(true);
 
-        console.log('Form submitted:', formData.name, 'form data email : ', formData.email, 'form data subject : ', formData.subject, 'form data message : ', formData.message);
         // Simulate sending (replace with your actual form submission logic)
         await new Promise(resolve => setTimeout(resolve, 1500));
 

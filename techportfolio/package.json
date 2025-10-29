@@ -11,7 +11,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@next/font": "^14.2.15",
-    "@studio-freight/lenis": "^1.0.42",
+    "lenis": "^1.1.19",
     "framer-motion": "^12.6.3",
     "motion": "^12.6.3",
     "motion-plus": "^0.1.6",
