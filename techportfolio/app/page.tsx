@@ -3,7 +3,6 @@
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Introduction from "./components/Introduction";
-import TechStack from "./components/TechStack";
 import BlogSection from "./components/BlogSection";
 import { useEffect } from "react";
 
@@ -14,7 +13,7 @@ export default function Home() {
   // Debug IDs on mount
   useEffect(() => {
     // Check if all section IDs exist
-    const sections = ['home', 'about', 'techstack', 'blog', 'contact'];
+    const sections = ['home', 'about', 'blog', 'contact'];
     sections.forEach(id => {
       const element = document.getElementById(id);
       console.log(`Section "${id}" exists: ${!!element}`);
@@ -28,7 +27,6 @@ export default function Home() {
         <Introduction />
       </section>
       <About />
-      <TechStack />
       <BlogSection />
       <Contact />
     </main>

@@ -6,6 +6,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import BlogCard from './BlogCard';
 import { motion, useInView } from 'framer-motion';
 import { useSmoothScroll } from '../providers/lenis-provider';
+import TickerHoverEffect from './TickerHoverEffect';
 
 export default function BlogSection() {
     const [articles, setArticles] = useState([]);
@@ -150,7 +151,7 @@ export default function BlogSection() {
         <section
             id="blog"
             ref={sectionRef}
-            className="relative py-24 md:py-32 bg-[#11212D] min-h-screen flex items-center"
+            className="relative py-24 md:py-32 bg-black min-h-screen overflow-x-hidden"
             data-scroll-section
         >
             {/* Background gradients */}
@@ -163,96 +164,106 @@ export default function BlogSection() {
                 ></div>
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
-                {/* Section heading with fade-in only */}
-                <motion.div
-                    className="text-center mb-12 md:mb-16"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView || hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                >
-                    <h2
-                        ref={headingRef}
-                        className="font-fraunces font-bold text-center mb-6 text-[4.5rem] text-[#ccd0cf] relative"
-                        style={{
-                            textShadow: `
-                                0 0 5px rgba(204, 208, 207, 0.3),
-                                0 0 10px rgba(204, 208, 207, 0.2),
-                                0 0 15px rgba(204, 208, 207, 0.1)
-                            `,
-                            lineHeight: '1',
-                        }}
+            {/* Ticker - Full Width */}
+            <div className="relative z-20 mb-6">
+                <TickerHoverEffect items={['Blog']} />
+            </div>
+
+            <div className="relative z-10">
+                <div className="container mx-auto px-4">
+                    {/* Section heading */}
+                    <motion.div
+                        className="text-center mb-12 md:mb-16"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={isInView || hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        Blog
-                    </h2>
-                    <p className="font-raleway text-[#9BA8AB] max-w-2xl mx-auto text-base md:text-lg">
-                        Thoughts, insights, and tutorials from my journey in software engineering and cloud architecture.
-                    </p>
-                </motion.div>
+                        <p className="font-raleway text-white max-w-2xl mx-auto text-base md:text-lg">
+                            Thoughts, insights, and tutorials from my journey in software engineering and cloud architecture.
+                        </p>
+                    </motion.div>
 
-                {/* Content area - No animations or scroll effects */}
-                <div ref={contentRef} className="transition-all duration-300">
-                    {/* Loading state */}
-                    {loading && (
-                        <div className="flex flex-col items-center justify-center py-16">
-                            <div className="h-12 w-12 rounded-full border-t-2 border-b-2 border-[#00C2FF] animate-spin mb-4"></div>
-                            <p className="text-[#9BA8AB] font-raleway">Loading articles...</p>
-                        </div>
-                    )}
-
-                    {/* Error state */}
-                    {!loading && error && (
-                        <div className="bg-[#0f1923] p-8 rounded-xl border border-[#1e2a36] max-w-2xl mx-auto text-center shadow-lg">
-                            <p className="text-[#9BA8AB] font-raleway mb-4">Error loading articles: {error}</p>
-                            <p className="text-[#9BA8AB] font-raleway">
-                                You can visit my{' '}
-                                <a
-                                    href="https://medium.com/@nagarjunmallesh"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-[#00C2FF] hover:underline font-medium"
-                                >
-                                    Medium profile
-                                </a>{' '}
-                                directly.
-                            </p>
-                        </div>
-                    )}
-
-                    {/* Empty state */}
-                    {!loading && !error && (!articles || articles.length === 0) && (
-                        <div className="bg-[#0f1923] p-6 rounded-xl border border-[#1e2a36] max-w-2xl mx-auto text-center shadow-lg">
-                            <p className="text-[#9BA8AB] font-raleway">No articles found at this time.</p>
-                        </div>
-                    )}
-
-                    {/* Articles grid - NO SMOOTH SCROLLING EFFECTS */}
-                    {!loading && !error && articles && articles.length > 0 && (
-                        <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                                {articles.slice(0, 6).map((article, index) => (
-                                    <div key={index} className="h-full">
-                                        <BlogCard article={article} />
-                                    </div>
-                                ))}
+                    {/* Content area - No animations or scroll effects */}
+                    <div ref={contentRef} className="transition-all duration-300">
+                        {/* Loading state */}
+                        {loading && (
+                            <div className="flex flex-col items-center justify-center py-16">
+                                <div className="h-12 w-12 rounded-full border-t-2 border-b-2 border-[#00C2FF] animate-spin mb-4"></div>
+                                <p className="text-white font-raleway">Loading articles...</p>
                             </div>
+                        )}
 
-                            {/* View all link */}
-                            <div className="mt-10 md:mt-12 text-center">
-                                <a
-                                    href="https://medium.com/@nagarjunmallesh"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-[#064141] to-[#00C2FF] text-white font-montserrat hover:from-[#00C2FF] hover:to-[#064141] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                >
-                                    View all articles
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
+                        {/* Error state */}
+                        {!loading && error && (
+                            <div className="bg-[#0f1923] p-8 rounded-xl border border-[#1e2a36] max-w-2xl mx-auto text-center shadow-lg">
+                                <p className="text-white font-raleway mb-4">Error loading articles: {error}</p>
+                                <p className="text-white font-raleway">
+                                    You can visit my{' '}
+                                    <a
+                                        href="https://medium.com/@nagarjunmallesh"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-[#00C2FF] hover:underline font-medium"
+                                    >
+                                        Medium profile
+                                    </a>{' '}
+                                    directly.
+                                </p>
                             </div>
-                        </>
-                    )}
+                        )}
+
+                        {/* Empty state */}
+                        {!loading && !error && (!articles || articles.length === 0) && (
+                            <div className="bg-[#0f1923] p-6 rounded-xl border border-[#1e2a36] max-w-2xl mx-auto text-center shadow-lg">
+                                <p className="text-white font-raleway">No articles found at this time.</p>
+                            </div>
+                        )}
+
+                        {/* Articles grid - NO SMOOTH SCROLLING EFFECTS */}
+                        {!loading && !error && articles && articles.length > 0 && (
+                            <>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                                    {articles.slice(0, 6).map((article, index) => (
+                                        <div key={index} className="h-full">
+                                            <BlogCard article={article} />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* View all link */}
+                                <div className="mt-10 md:mt-12 text-center">
+                                    <a
+                                        href="https://medium.com/@nagarjunmallesh"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group relative inline-flex items-center rounded-[32px] px-10 py-4 text-white font-montserrat font-medium text-lg transition-all duration-500 overflow-hidden cursor-pointer"
+                                    >
+                                        {/* Outer glow - white */}
+                                        <span className="absolute inset-0 rounded-[32px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.3),transparent_70%)] opacity-40 blur-2xl transition-all duration-500 group-hover:opacity-80 group-hover:blur-3xl"></span>
+
+                                        {/* Base gradient background - dark with subtle white tint */}
+                                        <span className="absolute inset-0 rounded-[32px] bg-gradient-to-r from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] border border-white/20"></span>
+
+                                        {/* White gradient overlay - becomes visible on hover */}
+                                        <span className="absolute inset-0 rounded-[32px] bg-gradient-to-r from-white/10 via-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+
+                                        {/* Shimmer effect on hover */}
+                                        <span className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[linear-gradient(110deg,transparent_0%,transparent_40%,rgba(255,255,255,0.4)_50%,transparent_60%,transparent_100%)] animate-shimmer"></span>
+
+                                        {/* Inner highlight for depth */}
+                                        <span className="absolute inset-0 rounded-[32px] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)] group-hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)] transition-shadow duration-500"></span>
+
+                                        <span className="relative z-10 flex items-center">
+                                            View all articles
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </section>

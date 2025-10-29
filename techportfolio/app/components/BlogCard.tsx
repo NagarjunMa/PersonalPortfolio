@@ -85,17 +85,17 @@ const BlogCard = ({ article }: { article: ArticleProps }) => {
                 {/* Card Content */}
                 <div className="p-6 flex flex-col flex-grow">
                     {/* UPDATED: Applied Montserrat font to title */}
-                    <h3 className="font-montserrat text-xl font-semibold mb-2 line-clamp-2 text-[#CCDCCF] hover:text-[#00C2FF] transition-colors">
+                    <h3 className="font-montserrat text-xl font-semibold mb-2 line-clamp-2 text-white hover:text-[#00C2FF] transition-colors">
                         {safeArticle.title}
                     </h3>
 
                     {/* UPDATED: Applied Raleway font to date */}
-                    <p className="font-raleway text-xs text-[#9BA8AB] mb-2">
+                    <p className="font-raleway text-xs text-white mb-2">
                         {safeArticle.date}
                     </p>
 
                     {/* UPDATED: Applied Raleway font to description */}
-                    <p className="font-raleway text-sm mb-4 flex-grow line-clamp-3 text-[#9BA8AB]">
+                    <p className="font-raleway text-sm mb-4 flex-grow line-clamp-3 text-white">
                         {safeArticle.description}
                     </p>
 

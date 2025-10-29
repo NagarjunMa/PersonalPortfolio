@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
+import { SparklesIcon, CubeIcon, ShieldCheckIcon, DocumentTextIcon, EnvelopeIcon } from "@heroicons/react/24/solid"
 
 const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
@@ -27,7 +28,7 @@ const NavBar = () => {
     // Track active section
     useEffect(() => {
         const handleScroll = () => {
-            const sections = ['home', 'about', 'techstack', 'blog', 'contact']
+            const sections = ['home', 'about', 'blog', 'contact']
             const scrollPosition = window.scrollY + 100 // Offset for better UX
 
             // Find the active section
@@ -76,19 +77,15 @@ const NavBar = () => {
     }
 
     const navItems = [
-        { id: 'home', label: 'Home' },
-        { id: 'about', label: 'About' },
-        { id: 'techstack', label: 'TechStack' },
-        { id: 'blog', label: 'Blog' },
-        { id: 'contact', label: 'Contact' }
+        { id: 'home', label: 'Home', icon: <SparklesIcon className="h-5 w-5 text-white" /> },
+        { id: 'about', label: 'About', icon: <ShieldCheckIcon className="h-5 w-5 text-white" /> },
+        { id: 'blog', label: 'Blog', icon: <DocumentTextIcon className="h-5 w-5 text-white" /> },
+        { id: 'contact', label: 'Contact', icon: <EnvelopeIcon className="h-5 w-5 text-white" /> }
     ]
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? 'py-2 bg-[#11212D]/90 backdrop-blur-md shadow-lg'
-                : 'py-5 bg-transparent'
-                }`}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-5'} bg-transparent`}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 {/* Logo & Name */}
@@ -101,48 +98,46 @@ const NavBar = () => {
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     >
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00C2FF] to-[#064141] mr-3 flex items-center justify-center shadow-lg">
-                            <span className="font-bold text-[#ccd0cf] text-xs">NM</span>
-                        </div>
-                        <h1 className="text-xl font-medium text-[#ccd0cf]">
-                            <span className="text-[#00C2FF] font-monoton">Nagarjun</span> Mallesh
+                        <img src="/Logo/1.png" alt="Logo" className="w-8 h-8 object-contain mr-3 rounded-lg" />
+                        <h1 className="text-xl font-stardom text-white">
+                            Nagarjun Mallesh
                         </h1>
                     </motion.div>
                 </div>
 
-                {/* Desktop menu */}
-                <nav className="hidden md:block">
-                    <ul className="flex space-x-6 items-center">
-                        {navItems.map(item => (
-                            <li key={item.id}>
-                                <button
-                                    onClick={() => scrollToSection(item.id)}
-                                    className={`relative text-sm font-montserrat transition-colors py-2 px-1 ${activeSection === item.id
-                                        ? 'text-[#00C2FF]'
-                                        : 'text-[#9BA8AB] hover:text-[#ccd0cf]'
-                                        }`}
-                                >
-                                    {item.label}
-                                    {activeSection === item.id && (
-                                        <motion.div
-                                            layoutId="navbar-underline"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00C2FF]"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ duration: 0.3 }}
-                                        />
-                                    )}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                {/* Desktop menu - glass pill */}
+                <nav className="hidden md:block flex-1">
+                    <div className="w-full flex justify-center relative">
+                        {/* Glow under pill - layered for soft spread */}
+                        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 pointer-events-none">
+                            <div className="mx-auto h-10 w-[70vw] max-w-[720px] bg-white/25 blur-3xl rounded-full" />
+                            <div className="mx-auto -mt-6 h-8 w-[60vw] max-w-[620px] bg-white/15 blur-2xl rounded-full" />
+                        </div>
+                        <div className="rounded-full border border-white/10 bg-gradient-to-b from-white/15 to-white/[0.06] backdrop-blur-md px-5 py-2 shadow-[0_10px_35px_rgba(0,0,0,0.45)]">
+                            <ul className="flex items-center divide-x divide-white/10">
+                                {navItems.map((item, idx) => (
+                                    <li key={item.id} className="px-4">
+                                        <button
+                                            onClick={() => scrollToSection(item.id)}
+                                            className={`flex items-center gap-2 text-sm font-montserrat transition-colors cursor-pointer ${activeSection === item.id ? 'text-white' : 'text-white/85 hover:text-white'}`}
+                                        >
+                                            <span className="opacity-100 text-white">
+                                                {item.icon}
+                                            </span>
+                                            {item.label}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                 </nav>
 
                 {/* Mobile menu button */}
                 <div className="md:hidden">
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 rounded-md text-[#9BA8AB] hover:text-[#00C2FF]"
+                        className="p-2 rounded-md text-white hover:text-white/70 cursor-pointer"
                         aria-label="Open menu"
                     >
                         <div className="w-6 flex flex-col items-end space-y-1.5">
@@ -182,9 +177,9 @@ const NavBar = () => {
                                     >
                                         <button
                                             onClick={() => scrollToSection(item.id)}
-                                            className={`font-montserrat block w-full text-left py-2 px-3 rounded-md ${activeSection === item.id
-                                                ? 'text-[#00C2FF] bg-[#253745]/60'
-                                                : 'text-[#9BA8AB] hover:bg-[#253745]/30 hover:text-[#ccd0cf]'
+                                            className={`font-montserrat block w-full text-left py-2 px-3 rounded-md cursor-pointer ${activeSection === item.id
+                                                ? 'text-white bg-white/10'
+                                                : 'text-white/80 hover:bg-white/5 hover:text-white'
                                                 }`}
                                         >
                                             {item.label}

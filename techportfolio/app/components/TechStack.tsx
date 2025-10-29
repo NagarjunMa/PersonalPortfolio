@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSmoothScroll } from '../providers/lenis-provider'
 import { AnimatePresence } from "motion/react"
 import * as motion from "motion/react-client"
+import TickerHoverEffect from './TickerHoverEffect'
 import {
     FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaDocker, FaPython, FaGithub, FaGoogle, FaAws,
     FaJava
@@ -143,7 +144,7 @@ export default function TechStack() {
         <section
             id="techstack"
             ref={sectionRef}
-            className="min-h-screen py-16 md:py-20 lg:py-24 bg-[#11212D] relative overflow-hidden flex flex-col justify-center"
+            className="min-h-screen py-16 md:py-20 lg:py-24 bg-black relative overflow-x-hidden"
         >
             {/* Background elements */}
             <div className="absolute inset-0 overflow-hidden">
@@ -151,27 +152,12 @@ export default function TechStack() {
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-[#064141B]/30 filter blur-[120px] -translate-x-1/3 translate-y-1/4"></div>
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
-                <h2
-                    ref={headingRef}
-                    className="font-fraunces font-bold text-center mb-8 md:mb-12 lg:mb-16 transition-all duration-300"
-                    style={{
-                        fontSize: '2.5rem', // Start with base size for SSR
-                        color: '#ccd0cf',
-                        textShadow: `
-                            0 0 5px rgba(204, 208, 207, 0.3),
-                            0 0 10px rgba(204, 208, 207, 0.2),
-                            0 0 15px rgba(204, 208, 207, 0.1)
-                        `,
-                        transformOrigin: 'center center',
-                        lineHeight: '1.1',
-                        transition: 'all 0.3s ease',
-                        willChange: 'transform, opacity, font-size'
-                    }}
-                >
-                    TechStack
-                </h2>
+            {/* Ticker - Full Width */}
+            <div className="relative z-20 mb-8 md:mb-12 lg:mb-16">
+                <TickerHoverEffect items={['Tech Stack']} />
+            </div>
 
+            <div className="container mx-auto px-4 relative z-10">
                 <div
                     ref={contentRef}
                     className="max-w-6xl mx-auto transition-all duration-300"
@@ -200,7 +186,7 @@ export default function TechStack() {
                                                     item === selectedTab ? "#1e2a36" : "transparent",
                                             }}
                                             className="flex-1 min-w-0 relative flex justify-center items-center h-11 rounded-t-md cursor-pointer transition-colors px-2 text-xs md:text-sm uppercase font-semibold select-none"
-                                            style={{ color: item === selectedTab ? '#00C2FF' : '#9BA8AB' }}
+                                            style={{ color: item === selectedTab ? '#00C2FF' : '#ffffff' }}
                                             onClick={() => setSelectedTab(item)}
                                         >
                                             {item.label}
@@ -249,7 +235,7 @@ export default function TechStack() {
                                                             {skill.icon}
                                                         </span>
                                                     </div>
-                                                    <span className="text-center text-sm font-medium text-[#9BA8AB]">{skill.name}</span>
+                                                    <span className="text-center text-sm font-medium text-white">{skill.name}</span>
                                                 </motion.div>
                                             ))}
                                         </div>

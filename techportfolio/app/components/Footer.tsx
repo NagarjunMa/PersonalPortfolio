@@ -7,32 +7,32 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-[#0a1016] py-12 border-t border-[#1e2a36]">
+        <footer className="bg-black py-12 border-t border-[#1e2a36]">
             <div className="container mx-auto px-4">
                 {/* Top section with logo and navigation */}
                 <div className="flex flex-col md:flex-row justify-between items-center mb-12">
                     {/* Logo/Name */}
                     <div className="mb-6 md:mb-0">
-                        <Link href="/" className="text-2xl font-bold tracking-wide" style={{ color: '#CCDCCF' }}>
+                        <Link href="/" className="text-2xl font-bold tracking-wide" style={{ color: '#FFFFFF' }}>
                             NAGARJUN.
                         </Link>
                     </div>
 
                     {/* Navigation */}
                     <nav className="flex flex-wrap justify-center gap-8">
-                        <Link href="#intro" className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors">
+                        <Link href="#intro" className="text-white hover:text-[#00C2FF] transition-colors">
                             Home
                         </Link>
-                        <Link href="#about" className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors">
+                        <Link href="#about" className="text-white hover:text-[#00C2FF] transition-colors">
                             About
                         </Link>
-                        <Link href="#techstack" className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors">
+                        <Link href="#techstack" className="text-white hover:text-[#00C2FF] transition-colors">
                             Skills
                         </Link>
-                        <Link href="#blog" className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors">
+                        <Link href="#blog" className="text-white hover:text-[#00C2FF] transition-colors">
                             Blog
                         </Link>
-                        <Link href="#contact" className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors">
+                        <Link href="#contact" className="text-white hover:text-[#00C2FF] transition-colors">
                             Contact
                         </Link>
                     </nav>
@@ -44,7 +44,7 @@ const Footer = () => {
                         href="https://github.com/NagarjunMa"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors text-xl"
+                        className="text-white hover:text-[#00C2FF] transition-colors text-xl"
                         aria-label="GitHub"
                     >
                         <FaGithub />
@@ -53,7 +53,7 @@ const Footer = () => {
                         href="https://linkedin.com/in/nagarjun-mallesh"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors text-xl"
+                        className="text-white hover:text-[#00C2FF] transition-colors text-xl"
                         aria-label="LinkedIn"
                     >
                         <FaLinkedinIn />
@@ -62,7 +62,7 @@ const Footer = () => {
                     <a href="https://twitter.com/yourusername"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors text-xl"
+                        className="text-white hover:text-[#00C2FF] transition-colors text-xl"
                         aria-label="Twitter"
                     >
                         <FaTwitter />
@@ -71,7 +71,7 @@ const Footer = () => {
                     <a href="https://medium.com/@nagarjunmallesh"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#9BA8AB] hover:text-[#00C2FF] transition-colors text-xl"
+                        className="text-white hover:text-[#00C2FF] transition-colors text-xl"
                         aria-label="Medium"
                     >
                         <FaMediumM />
@@ -80,10 +80,10 @@ const Footer = () => {
 
                 {/* Bottom section with copyright */}
                 <div className="text-center">
-                    <p className="text-sm" style={{ color: '#9BA8AB' }}>
+                    <p className="text-sm text-white">
                         © {currentYear} Nagarjun Mallesh. All rights reserved.
                     </p>
-                    <p className="text-xs mt-2" style={{ color: '#5d6b74' }}>
+                    <p className="text-xs mt-2 text-white">
                         Designed & built with ❤️ using Next.js
                     </p>
                 </div>

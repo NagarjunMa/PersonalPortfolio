@@ -2,17 +2,61 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import { FaTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa'
 import { useSmoothScroll } from '../providers/lenis-provider'  // Importing your Lenis context
+// Typewriter effect - no fade animations
+
+const specialties = ['FullStack', 'Backend', 'GenAI', 'Infrastructure', 'DevOps'];
 
 const Introduction = () => {
     const [isClient, setIsClient] = useState(false)
     const [scrollProgress, setScrollProgress] = useState(0)
+    const [currentSpecialty, setCurrentSpecialty] = useState(0)
+    const [displayedText, setDisplayedText] = useState('')
+    const [isDeleting, setIsDeleting] = useState(false)
     const headingRef = useRef<HTMLHeadingElement>(null)
     const subHeadingRef = useRef<HTMLHeadingElement>(null)
     const sectionRef = useRef<HTMLDivElement>(null)
     const lenis = useSmoothScroll()  // Get Lenis instance
+
+    // Typewriter effect
+    useEffect(() => {
+        if (!isClient) return;
+
+        const current = specialties[currentSpecialty];
+        const fullText = current + ' Developer';
+
+        let delay: number;
+
+        if (isDeleting) {
+            delay = displayedText.length > 0 ? 50 : 500;
+        } else {
+            delay = displayedText !== fullText ? 100 : 2000;
+        }
+
+        const timeout = setTimeout(() => {
+            if (isDeleting) {
+                // Delete one character at a time
+                if (displayedText.length > 0) {
+                    setDisplayedText(prev => prev.substring(0, prev.length - 1));
+                } else {
+                    // Finished deleting, move to next specialty
+                    setIsDeleting(false);
+                    setCurrentSpecialty(prev => (prev + 1) % specialties.length);
+                }
+            } else {
+                // Add one character at a time
+                if (displayedText !== fullText) {
+                    setDisplayedText(prev => fullText.substring(0, prev.length + 1));
+                } else {
+                    // Finished typing, wait then start deleting
+                    setIsDeleting(true);
+                }
+            }
+        }, delay);
+
+        return () => clearTimeout(timeout);
+    }, [isClient, displayedText, currentSpecialty, isDeleting])
 
     // Run once on mount to indicate we're on the client
     useEffect(() => {
@@ -52,9 +96,11 @@ const Introduction = () => {
         const headingScale = 1 + (scrollProgress * 0.3)
         const subHeadingScale = 1 + (scrollProgress * 0.25)
 
-        // Apply transformations
+        // Apply transformations with right alignment
         headingRef.current.style.transform = `scale(${headingScale})`
+        headingRef.current.style.transformOrigin = `right center`
         subHeadingRef.current.style.transform = `scale(${subHeadingScale})`
+        subHeadingRef.current.style.transformOrigin = `right center`
 
         // Optional: adjust opacity to fade out slightly as we scroll
         const opacity = 1 - (scrollProgress * 0.3)
@@ -67,152 +113,89 @@ const Introduction = () => {
     const initialRender = (
         <div
             ref={sectionRef}
-            className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
+            className="relative w-full min-h-screen flex items-center justify-start overflow-hidden bg-black"
         >
-            {/* Background laptop image with overlay */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-[#064141B] opacity-80 z-10"></div>
-                <Image
-                    src="/images/profilepicture/intro-bg.jpg"
-                    alt="Laptop with colorful screen"
-                    fill
-                    className="object-cover"
-                    priority
-                    quality={100}
-                />
-            </div>
+            {/* Black background - no image */}
+            <div className="absolute inset-0 bg-black z-0"></div>
 
-
-            {/* Content overlay */}
-            <div className="container mx-auto px-4 md:px-6 z-10 relative">
-                <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-                    {/* Main heading with 3D effect and glow */}
+            {/* Content overlay - Left Aligned */}
+            <div className="absolute inset-0 flex items-center justify-start pl-8 md:pl-12 lg:pl-16 xl:pl-24 z-10">
+                <div className="flex flex-col items-start">
+                    {/* Main heading with HUMANE font */}
                     <h1
                         ref={headingRef}
-                        className="font-monoton text-4xl md:text-5xl lg:text-6xl font-bold mb-4 name-3d glow-effect"
+                        className="font-humane text-8xl md:text-9xl lg:text-[11rem] xl:text-[12rem] font-bold"
                         style={{
-                            color: '#ccd0cf', // Primary text color
-                            transformOrigin: 'center center',
-                            transition: 'transform 0.15s ease-out'
+                            color: '#ffffff',
+                            transformOrigin: 'left center',
+                            transition: 'transform 0.15s ease-out',
+                            lineHeight: '0.65',
+                            textAlign: 'left',
+                            wordSpacing: '0.2rem',
                         }}
                     >
-                        Hi, I&apos;m Nagarjun Mallesh
+                        NAGARJUN MALLESH
                     </h1>
 
-                    <h2
-                        ref={subHeadingRef}
-                        className="font-montserrat text-xl md:text-2xl font-medium mb-10 subtitle-3d glow-effect-subtle"
-                        style={{
-                            color: '#9ba8ab', // Secondary text color
-                            transformOrigin: 'center center',
-                            transition: 'transform 0.15s ease-out'
-                        }}
-                    >
-                        Fullstack engineer crafting scalable, innovative solutions.
-                    </h2>
+                    {isClient ? (
+                        <div
+                            ref={subHeadingRef}
+                            className="font-montserrat text-xl md:text-2xl font-medium"
+                            style={{
+                                color: '#ffffff',
+                                transformOrigin: 'left center',
+                                transition: 'transform 0.15s ease-out',
+                                marginBottom: '2.5rem',
+                                textAlign: 'left',
+                                minHeight: '2rem'
+                            }}
+                        >
+                            <span style={{ display: 'inline-block' }}>
+                                {displayedText}
+                                <span className="animate-pulse">|</span>
+                            </span>
+                        </div>
+                    ) : (
+                        <div
+                            ref={subHeadingRef}
+                            className="font-montserrat text-xl md:text-2xl font-medium"
+                            style={{
+                                color: '#ffffff',
+                                transformOrigin: 'left center',
+                                transition: 'transform 0.15s ease-out',
+                                marginBottom: '2.5rem',
+                                textAlign: 'left',
+                                minHeight: '2rem'
+                            }}
+                        >
+                            {specialties[0]} Developer|
+                        </div>
+                    )}
 
                     {/* Social media icons */}
-                    <div className="flex space-x-6 mb-10">
+                    <div className="flex space-x-6 mb-10 justify-start">
                         <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer"
-                            className="text-2xl hover:text-cyan-400 transition-colors icon-3d icon-glow"
-                            style={{ color: '#9BA8AB' }}
+                            className="text-2xl hover:text-cyan-400 transition-colors"
+                            style={{ color: '#ffffff' }}
                         >
                             <FaTwitter />
                         </a>
                         <a href="https://linkedin.com/in/nagarjun-mallesh" target="_blank" rel="noopener noreferrer"
-                            className="text-2xl hover:text-cyan-400 transition-colors icon-3d icon-glow"
-                            style={{ color: '#9BA8AB' }}
+                            className="text-2xl hover:text-cyan-400 transition-colors"
+                            style={{ color: '#ffffff' }}
                         >
                             <FaLinkedinIn />
                         </a>
                         <a href="https://github.com/NagarjunMa" target="_blank" rel="noopener noreferrer"
-                            className="text-2xl hover:text-cyan-400 transition-colors icon-3d icon-glow"
-                            style={{ color: '#9BA8AB' }}
+                            className="text-2xl hover:text-cyan-400 transition-colors"
+                            style={{ color: '#ffffff' }}
                         >
                             <FaGithub />
                         </a>
                     </div>
 
-
                 </div>
             </div>
-
-            {/* Add CSS for 3D and glow effects */}
-            <style jsx>{`
-                .name-3d {
-                    text-shadow: 
-                        0 1px 0 #ccc,
-                        0 2px 0 #c9c9c9,
-                        0 3px 0 #bbb,
-                        0 4px 0 #b9b9b9,
-                        0 5px 0 #aaa,
-                        0 6px 1px rgba(0,0,0,.1),
-                        0 0 5px rgba(0,0,0,.1),
-                        0 1px 3px rgba(0,0,0,.3),
-                        0 3px 5px rgba(0,0,0,.2),
-                        0 5px 10px rgba(0,0,0,.25),
-                        0 10px 10px rgba(0,0,0,.2),
-                        0 20px 20px rgba(0,0,0,.15);
-                    transition: all 0.3s ease;
-                    will-change: transform, opacity;
-                }
-                
-                .glow-effect {
-                    text-shadow: 
-            0 0 5px rgba(204, 208, 207, 0.5),
-            0 0 10px rgba(204, 208, 207, 0.3),
-            0 0 15px rgba(204, 208, 207, 0.2),
-            0 0 20px rgba(204, 208, 207, 0.1);
-                        0 1px 0 #ccc,
-                        0 2px 0 #c9c9c9,
-                        0 3px 0 #bbb,
-                        0 4px 0 #b9b9b9,
-                        0 5px 0 #aaa,
-                        0 6px 1px rgba(0,0,0,.1),
-                        0 0 5px rgba(0,0,0,.1),
-                        0 1px 3px rgba(0,0,0,.3),
-                        0 3px 5px rgba(0,0,0,.2),
-                        0 5px 10px rgba(0,0,0,.25),
-                        0 10px 10px rgba(0,0,0,.2),
-                        0 20px 20px rgba(0,0,0,.15);
-                }
-                
-                .subtitle-3d {
-                    text-shadow: 
-                        0 2px 4px rgba(0,0,0,0.5),
-                        0 4px 8px rgba(0,0,0,0.3);
-                    transition: all 0.3s ease;
-                    will-change: transform, opacity;
-                }
-                
-                .glow-effect-subtle {
-                    text-shadow: 
-            0 0 5px rgba(155, 168, 171, 0.5),
-            0 0 10px rgba(155, 168, 171, 0.3);
-                        0 2px 4px rgba(0,0,0,0.5),
-                        0 4px 8px rgba(0,0,0,0.3);
-                }
-                
-                .icon-3d {
-                    text-shadow: 
-                        0 1px 3px rgba(0,0,0,0.3),
-                        0 3px 5px rgba(0,0,0,0.2);
-                    transform: translateY(0);
-                    transition: all 0.3s ease;
-                }
-                
-                .icon-glow {
-                    filter: drop-shadow(0 0 3px rgba(155, 168, 171, 0.4));
-                }
-                
-                .icon-3d:hover {
-                    transform: translateY(-5px);
-                    text-shadow: 
-                        0 5px 10px rgba(0,0,0,0.3),
-                        0 10px 15px rgba(0,0,0,0.2);
-                    filter: drop-shadow(0 0 8px rgba(155, 168, 171, 0.8));
-                }
-            `}</style>
         </div>
     );
 

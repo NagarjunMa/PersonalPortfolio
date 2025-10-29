@@ -1,5 +1,129 @@
 @import "tailwindcss";
 
+/* HUMANE Font Face Declarations */
+@font-face {
+  font-family: 'HUMANE';
+  src: url('/fonts/Humane-Regular.woff2') format('woff2'),
+    url('/fonts/Humane-Regular.woff') format('woff'),
+    url('/fonts/Humane-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HUMANE';
+  src: url('/fonts/Humane-Medium.woff2') format('woff2'),
+    url('/fonts/Humane-Medium.woff') format('woff'),
+    url('/fonts/Humane-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HUMANE';
+  src: url('/fonts/Humane-Bold.woff2') format('woff2'),
+    url('/fonts/Humane-Bold.woff') format('woff'),
+    url('/fonts/Humane-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Boska Font Face Declarations */
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/Boska-Regular.woff2') format('woff2'),
+    url('/fonts/Boska-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/Boska-Medium.woff2') format('woff2'),
+    url('/fonts/Boska-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/Boska-Bold.woff2') format('woff2'),
+    url('/fonts/Boska-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/Boska-Black.woff2') format('woff2'),
+    url('/fonts/Boska-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/Boska-Italic.woff2') format('woff2'),
+    url('/fonts/Boska-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Rosaline Font Face */
+@font-face {
+  font-family: 'Rosaline';
+  src: url('/fonts/Rosaline-Regular.woff2') format('woff2'),
+    url('/fonts/Rosaline-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Telma Font Face */
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/Telma-Regular.woff2') format('woff2'),
+    url('/fonts/Telma-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/Telma-Medium.woff2') format('woff2'),
+    url('/fonts/Telma-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/Telma-Bold.woff2') format('woff2'),
+    url('/fonts/Telma-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/Telma-Black.woff2') format('woff2'),
+    url('/fonts/Telma-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 
 
@@ -24,6 +148,10 @@ body {
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-humane: var(--font-humane);
+  --font-boska: 'Boska', sans-serif;
+  --font-rosaline: 'Rosaline', serif;
+  --font-telma: 'Telma', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

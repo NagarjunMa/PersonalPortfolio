@@ -1,34 +1,58 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
 
 export async function GET() {
     try {
-        // Use RSS2JSON API to fetch your Medium articles
-        const response = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@nagarjunmallesh`,
-            { next: { revalidate: 3600 } }
-        );
+        // Use rss2json API to bypass Medium's CORS and access restrictions
+        const mediumUsername = process.env.MEDIUM_USERNAME || 'nagarjunmallesh'
+        const mediumFeedUrl = `https://medium.com/feed/@${mediumUsername}`
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch from RSS2JSON: ${response.status}`);
+        // Using rss2json.com API (free tier allows 10,000 requests/day)
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(mediumFeedUrl)}`
+
+        const res = await fetch(apiUrl, {
+            next: { revalidate: 60 * 30 }, // Cache for 30 minutes
+            headers: {
+                'Accept': 'application/json',
+            }
+        })
+
+        if (!res.ok) {
+            return NextResponse.json({ error: `Failed to fetch feed: ${res.status}` }, { status: 502 })
         }
 
-        const data = await response.json();
+        const data = await res.json()
 
-        // Check if we have data in the expected format
-        if (data.status === 'ok' && data.items && Array.isArray(data.items)) {
-            return NextResponse.json(data.items);
-        } else {
-            console.error('Unexpected API response structure:', data);
-            return NextResponse.json([]);
+        // Check if the API returned an error
+        if (data.status !== 'ok') {
+            return NextResponse.json({ error: data.message || 'Failed to parse RSS feed' }, { status: 502 })
         }
-    } catch (error: unknown) {
-        console.error('API route error:', error);
 
-        // Safe error handling with proper type checking
-        const errorMessage = error instanceof Error
-            ? error.message
-            : 'Unknown error occurred';
+        // Transform the data to match our expected format
+        const items = data.items.map((item: any) => {
+            // Extract thumbnail from content or use author's image
+            let thumbnail = item.thumbnail || null
 
-        return NextResponse.json({ error: errorMessage }, { status: 500 });
+            // Try to extract first image from description/content if no thumbnail
+            if (!thumbnail && item.description) {
+                const imgMatch = item.description.match(/<img[^>]+src="([^">]+)"/i)
+                if (imgMatch && imgMatch[1]) {
+                    thumbnail = imgMatch[1]
+                }
+            }
+
+            return {
+                title: item.title || 'Untitled',
+                link: item.link || '#',
+                pubDate: item.pubDate || '',
+                thumbnail: thumbnail,
+                description: item.description || '',
+                categories: item.categories || [],
+            }
+        })
+
+        return NextResponse.json(items)
+    } catch (err: any) {
+        console.error('Error fetching Medium posts:', err)
+        return NextResponse.json({ error: err?.message || 'Unknown error' }, { status: 500 })
     }
 }
