@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -16,7 +16,7 @@
     "gsap": "^3.15.0",
     "motion": "^12.6.3",
     "motion-plus": "^0.1.6",
-    "next": "15.2.4",
+    "next": "^16.2.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -30,9 +30,12 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "15.2.4",
-    "postcss": "^8.5.3",
+    "eslint-config-next": "^16.2.9",
+    "postcss": "8.5.15",
     "tailwindcss": "^4.1.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.15"
   }
 }
