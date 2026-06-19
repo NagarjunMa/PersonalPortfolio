@@ -3,7 +3,6 @@ import { Raleway, Montserrat, Geist, Geist_Mono, Monoton } from "next/font/googl
 import localFont from 'next/font/local';
 import "./globals.css";
 import { Fraunces } from "next/font/google";
-import ScrollProvider from "./providers/lenis-provider";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
@@ -111,9 +110,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <NavBar />
-        <ScrollProvider>
-          {children}
-        </ScrollProvider>
+        {children}
         <Footer />
 
       </body>

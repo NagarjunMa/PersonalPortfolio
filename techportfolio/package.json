@@ -3,16 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@heroicons/react": "^2.2.0",
-    "@next/font": "^14.2.15",
     "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.6.3",
+    "gsap": "^3.15.0",
     "motion": "^12.6.3",
     "motion-plus": "^0.1.6",
     "next": "15.2.4",
