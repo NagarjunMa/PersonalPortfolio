@@ -4,72 +4,101 @@ import PortfolioStage from "./components/PortfolioStage";
 const projects = [
   {
     title: "Visual Learning",
-    eyebrow: "Live system design simulator",
-    summary:
-      "Interactive simulations that make system design, database internals, AI, networking, Kafka, rate limiting, and sharding visible instead of theoretical.",
-    stack: ["React", "TypeScript", "Vite", "SVG simulations"],
-    metric: "15",
-    metricLabel: "interactive learning modules",
+    eyebrow: "Interactive systems education",
+    problem:
+      "System design is often taught through static diagrams that hide runtime behavior.",
+    built:
+      "A client-side simulator with 15 interactive modules across databases, Kafka, TCP, rate limiting, transformer inference, sharding, and scaling patterns.",
+    depth:
+      "Typed simulation engines, SVG visualizations, live metrics, state-driven controls, and module-level architecture for adding new system internals.",
+    stack: ["React", "TypeScript", "Vite", "Tailwind", "Framer Motion", "SVG"],
     href: "https://visual-study.vercel.app",
   },
   {
     title: "Prism Pro",
-    eyebrow: "Live resume intelligence platform",
-    summary:
-      "Recruiter-grade resume polish and JD tailoring for experienced SWE, Data Science, and PM candidates across US and India markets.",
-    stack: ["Next.js", "FastAPI", "Supabase", "OpenAI"],
-    metric: "6",
-    metricLabel: "country-aware PDF templates",
+    eyebrow: "Resume intelligence platform",
+    problem:
+      "Resume tools either give generic advice or fabricate improvements candidates cannot defend.",
+    built:
+      "A FastAPI and Next.js platform for resume parsing, recruiter-style evaluation, JD tailoring, versioning, preview, and country-aware PDF export.",
+    depth:
+      "Schema-constrained LLM responses, hallucination guards, ATS simulation, Supabase auth/storage, credit accounting, and Playwright PDF rendering.",
+    stack: ["FastAPI", "SQLAlchemy", "Pydantic", "OpenAI", "Next.js", "Supabase"],
     href: "https://prismpro.live",
   },
   {
     title: "Aletheia",
-    eyebrow: "Live AI outreach system",
-    summary:
-      "A web app and Chrome extension that reads profile context, resume intent, and guardrails to generate authentic outreach without sounding synthetic.",
-    stack: ["Next.js", "Supabase", "Claude", "Chrome MV3"],
-    metric: "3",
-    metricLabel: "outreach surfaces",
+    eyebrow: "AI outreach assistant + Chrome extension",
+    problem:
+      "AI outreach often sounds generic, unsafe, or disconnected from real profile context.",
+    built:
+      "A Chrome MV3 extension and Next.js app that generate grounded LinkedIn notes, cold emails, and InMails from profile context, resume data, and user intent.",
+    depth:
+      "Prompt guardrails, sanitization, AI-fingerprint stripping, feedback loops, style learning, rate limits, Supabase auth, and Anthropic Claude integration.",
+    stack: ["Next.js", "TypeScript", "Chrome MV3", "Supabase", "Claude", "Zod"],
     href: "https://aletheia.live",
   },
 ];
 
-const skills = [
-  "Python",
-  "TypeScript",
-  "FastAPI",
-  "Node.js",
-  "Spring Boot",
-  "AWS Lambda",
-  "AWS Bedrock",
-  "Terraform",
-  "Docker",
-  "PostgreSQL",
-  "MongoDB",
-  "Redis",
-  "DynamoDB",
-  "Kafka",
-  "RAG",
-  "LLMs",
-  "FAISS",
-  "CloudWatch",
+const caseStudies = [
+  {
+    title: "Reliable LLM workflows",
+    text:
+      "Built generation systems where the hard part is not calling a model, but constraining the workflow: typed schemas, prompt versions, safety filters, hallucination guards, credit reservations, rate limits, and feedback metadata.",
+    proof: ["Prism Pro", "Aletheia", "OpenAI", "Claude", "Zod", "Pydantic"],
+  },
+  {
+    title: "Making invisible systems visible",
+    text:
+      "Modeled system-design and infrastructure behavior as interactive state machines: broker failure, leader election, rate-limit algorithms, LSM writes, B+ tree splits, transformer inference, and sharding tradeoffs.",
+    proof: ["Visual Learning", "simulation engines", "SVG", "typed state"],
+  },
+  {
+    title: "Productizing ambiguous workflows",
+    text:
+      "Turned open-ended user problems into complete product flows: upload, parse, evaluate, rewrite, accept changes, export PDFs, browser-extension auth, profile context extraction, and production feedback loops.",
+    proof: ["FastAPI", "Next.js", "Supabase", "Playwright", "Chrome extension"],
+  },
+];
+
+const stackGroups = [
+  {
+    title: "Languages & runtimes",
+    items: ["Python", "TypeScript", "JavaScript", "Java", "Node.js"],
+  },
+  {
+    title: "Backend & APIs",
+    items: ["FastAPI", "Spring Boot", "SQLAlchemy", "Pydantic", "REST APIs", "auth", "rate limits"],
+  },
+  {
+    title: "AI systems",
+    items: ["OpenAI", "Anthropic Claude", "RAG", "prompt guardrails", "eval metadata", "hallucination controls"],
+  },
+  {
+    title: "Cloud & data",
+    items: ["AWS", "Supabase", "PostgreSQL", "Redis", "MongoDB", "DynamoDB", "Docker", "Terraform"],
+  },
+  {
+    title: "Frontend & product",
+    items: ["Next.js", "React", "Vite", "Chrome extensions", "Tailwind", "Playwright", "Framer Motion"],
+  },
 ];
 
 const timeline = [
   {
     year: "2025",
-    title: "Systems Analyst",
-    text: "Software engineering for RAG, LLM text-normalization, FastAPI, Bedrock, and infrastructure automation at ML Technologies.",
+    title: "AI, RAG, and automation systems",
+    text: "Shipping RAG, LLM text-normalization, FastAPI, AWS Bedrock, and infrastructure automation workflows at ML Technologies.",
   },
   {
     year: "2024",
-    title: "Backend Engineer",
-    text: "Built AWS/GCP storage, Node.js services, RDS, Terraform, Docker, and CloudWatch monitoring for Keelworks.",
+    title: "Cloud backend and infrastructure",
+    text: "Built AWS/GCP storage services, Node.js APIs, RDS integrations, Terraform, Docker, and CloudWatch monitoring for Keelworks.",
   },
   {
     year: "2019-2022",
-    title: "Software Engineer",
-    text: "Automated HP provisioning workflows and earlier migrated banking services to Spring Boot microservices with Kafka.",
+    title: "Enterprise software engineering",
+    text: "Automated HP provisioning workflows and migrated banking services toward Spring Boot microservices with Kafka.",
   },
 ];
 
@@ -94,30 +123,27 @@ const writing = [
   },
 ];
 
-const sideQuests = [
-  "Obsidian - knowledge graph",
-  "Corpus-grounded RAG triage agent",
-  "RunPod serverless GPU benchmark",
-];
-
 export default function Home() {
   return (
     <PortfolioStage>
       <section id="home" className="portfolio-section hero-section">
         <div className="shell hero-grid">
           <div className="hero-copy">
-            <p className="kicker">Software engineer / cloud systems / GenAI</p>
+            <p className="kicker">Full-stack engineer / applied AI / cloud systems</p>
             <h1 className="hero-title">
-              Nagarjun <span>Mallesh.</span>
+              I build applied AI, backend, and cloud systems from ambiguity to{" "}
+              <span>production.</span>
             </h1>
             <p className="hero-lede">
-              I build backend, cloud, automation, and AI-enabled systems with a
-              bias for reliable workflows, clear architecture, and measurable
-              operational impact.
+              My work sits across Python, TypeScript, FastAPI, Next.js, Supabase,
+              AWS, Docker, Terraform, RAG, LLM workflows, and browser automation.
+              I focus on grounded systems: reliable APIs, clear architecture,
+              safe AI pipelines, and interfaces that make complex workflows
+              understandable.
             </p>
             <div className="hero-actions" aria-label="Primary links">
               <a href="#work" className="button button-primary">
-                View work
+                View systems
               </a>
               <a
                 href="/documents/NagarjunMallesh.pdf"
@@ -127,6 +153,12 @@ export default function Home() {
               >
                 Resume
               </a>
+            </div>
+            <div className="hero-proof-grid" aria-label="Engineering focus">
+              <span>AI workflow systems</span>
+              <span>Backend/API design</span>
+              <span>Full-stack product engineering</span>
+              <span>Cloud automation</span>
             </div>
           </div>
 
@@ -149,19 +181,24 @@ export default function Home() {
 
       <section className="ticker-strip" aria-label="Portfolio focus">
         <span>Available for thoughtful engineering work</span>
+        <span>Applied AI</span>
         <span>Backend</span>
-        <span>Cloud</span>
-        <span>AI integration</span>
-        <span>Product-minded systems</span>
+        <span>Cloud systems</span>
+        <span>FDE / product engineering</span>
       </section>
 
       <section id="work" className="portfolio-section">
         <div className="shell">
           <div className="section-heading" data-reveal>
-            <p className="kicker">Selected work</p>
+            <p className="kicker">Live systems</p>
             <h2>
-              Work that proves the <span>range.</span>
+              Systems I have <span>built.</span>
             </h2>
+            <p className="section-intro">
+              Three shipped products that show the range: simulation engines,
+              resume intelligence, and AI outreach automation. The common thread
+              is turning complex workflows into usable, defensible systems.
+            </p>
           </div>
 
           <div className="bento-grid work-grid">
@@ -174,13 +211,22 @@ export default function Home() {
                 <div>
                   <p className="card-label">{project.eyebrow}</p>
                   <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
+                  <div className="project-meta">
+                    <div>
+                      <span>Problem</span>
+                      <p>{project.problem}</p>
+                    </div>
+                    <div>
+                      <span>Built</span>
+                      <p>{project.built}</p>
+                    </div>
+                    <div>
+                      <span>Technical depth</span>
+                      <p>{project.depth}</p>
+                    </div>
+                  </div>
                 </div>
                 <div className="project-footer">
-                  <div className="metric">
-                    <strong>{project.metric}</strong>
-                    <span>{project.metricLabel}</span>
-                  </div>
                   <ul className="pill-list" aria-label={`${project.title} stack`}>
                     {project.stack.map((item) => (
                       <li key={item}>{item}</li>
@@ -201,12 +247,38 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="cases" className="portfolio-section">
+        <div className="shell">
+          <div className="section-heading compact-heading" data-reveal>
+            <p className="kicker">Case studies</p>
+            <h2>
+              Engineering judgment, not just <span>demos.</span>
+            </h2>
+          </div>
+
+          <div className="case-grid">
+            {caseStudies.map((study, index) => (
+              <article key={study.title} className="bento-card case-card" data-reveal>
+                <p className="case-index">0{index + 1}</p>
+                <h3>{study.title}</h3>
+                <p>{study.text}</p>
+                <ul className="pill-list" aria-label={`${study.title} proof`}>
+                  {study.proof.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="about" className="portfolio-section">
         <div className="shell about-grid">
           <div className="section-heading sticky-heading" data-reveal>
-            <p className="kicker">The arc</p>
+            <p className="kicker">Engineering arc</p>
             <h2>
-              Builder first, designer of systems <span>second.</span>
+              Useful before impressive. Reliable before <span>clever.</span>
             </h2>
           </div>
 
@@ -214,13 +286,9 @@ export default function Home() {
             <article className="bento-card about-card" data-reveal>
               <p className="about-index">(02)</p>
               <p className="about-statement">
-                I build useful systems across AI, cloud, and full-stack product
-                engineering.
-                <br />
-                I turn complex architecture into tools people can understand,
-                operate, and <span>trust.</span>
-                <br />
-                Curiosity starts the work; production discipline finishes it.
+                I like the work between possibility and production: clarifying
+                messy requirements, choosing the right technical boundary, and
+                building systems that teams can operate without guesswork.
               </p>
             </article>
 
@@ -237,20 +305,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="portfolio-section">
+      <section id="stack" className="portfolio-section">
         <div className="shell">
           <div className="section-heading compact-heading" data-reveal>
-            <p className="kicker">The toolkit</p>
+            <p className="kicker">Stack</p>
             <h2>
-              Technical range, kept <span>legible.</span>
+              Tools I use to <span>ship.</span>
             </h2>
           </div>
 
-          <div className="toolkit-grid">
-            {skills.map((skill) => (
-              <span key={skill} data-reveal>
-                {skill}
-              </span>
+          <div className="stack-groups">
+            {stackGroups.map((group) => (
+              <article key={group.title} className="bento-card stack-group" data-reveal>
+                <h3>{group.title}</h3>
+                <ul className="pill-list">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
             ))}
           </div>
         </div>
@@ -259,14 +332,14 @@ export default function Home() {
       <section id="blog" className="portfolio-section writing-section">
         <div className="shell writing-grid">
           <div className="bento-card writing-feature" data-reveal>
-            <p className="kicker">Writing</p>
+            <p className="kicker">Technical writing</p>
             <h2>
-              Notes from the workbench, not a content <span>machine.</span>
+              Writing to make systems easier to <span>understand.</span>
             </h2>
             <p>
-              I write and build around visual learning: simulations, architecture
-              notes, and small explanations that make complex systems easier to
-              see, test, and reason about.
+              I write and build visual explanations around document extraction,
+              LLM workflows, system design, developer tools, and the engineering
+              choices that make emerging technology approachable.
             </p>
             <div className="writing-actions">
               <a
@@ -311,44 +384,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="portfolio-section">
-        <div className="shell">
-          <div className="section-heading compact-heading" data-reveal>
-            <p className="kicker">Side quests</p>
-            <h2>
-              Small explorations keep the craft <span>warm.</span>
-            </h2>
-          </div>
-
-          <div className="side-grid">
-            {sideQuests.map((quest, index) => (
-              <article
-                key={quest}
-                className={`bento-card side-card side-${index + 1}`}
-                data-reveal
-              >
-                <span className="side-index">0{index + 1}</span>
-                <h3>{quest}</h3>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="contact" className="portfolio-section contact-section">
         <div className="shell contact-grid">
           <div data-reveal>
             <p className="kicker">Contact</p>
             <h2 className="contact-title">
-              Let&apos;s build <span>quietly excellent</span> systems.
+              Available for full-stack, backend, AI product, FDE, and cloud
+              systems roles.
             </h2>
           </div>
 
           <div className="bento-card contact-card" data-reveal>
             <p>
-              Best for backend, cloud, AI integration, full-stack product, and
-              infrastructure automation work that needs both taste and
-              production discipline.
+              Best fit: teams that need someone to translate ambiguous technical
+              problems into reliable APIs, AI workflows, product surfaces, and
+              infrastructure automation.
             </p>
             <div className="contact-links">
               <a href="mailto:nagarjunmallesh@gmail.com">Email</a>
