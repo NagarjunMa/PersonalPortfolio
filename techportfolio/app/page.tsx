@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import PortfolioStage from "./components/PortfolioStage";
 
 const projects = [
@@ -128,7 +129,7 @@ export default function Home() {
     <PortfolioStage>
       <section id="home" className="portfolio-section hero-section">
         <div className="shell hero-grid">
-          <div className="hero-copy">
+          <div className="hero-copy bento-card hero-main-card">
             <p className="kicker">Full-stack engineer / applied AI / cloud systems</p>
             <h1 className="hero-title">
               I build applied AI, backend, and cloud systems from ambiguity to{" "}
@@ -154,12 +155,6 @@ export default function Home() {
                 Resume
               </a>
             </div>
-            <div className="hero-proof-grid" aria-label="Engineering focus">
-              <span>AI workflow systems</span>
-              <span>Backend/API design</span>
-              <span>Full-stack product engineering</span>
-              <span>Cloud automation</span>
-            </div>
           </div>
 
           <div className="portrait-card bento-card">
@@ -175,6 +170,13 @@ export default function Home() {
               <p className="card-label">Based in the US</p>
               <p className="card-title">New York, NY. Open to relocation.</p>
             </div>
+          </div>
+
+          <div className="hero-proof-grid" aria-label="Engineering focus">
+            <span>AI workflow systems</span>
+            <span>Backend/API design</span>
+            <span>Full-stack product engineering</span>
+            <span>Cloud automation</span>
           </div>
         </div>
       </section>
@@ -201,16 +203,29 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bento-grid work-grid">
+          <div className="project-deck">
             {projects.map((project, index) => (
               <article
                 key={project.title}
                 data-reveal
-                className={`bento-card project-card project-card-${index + 1}`}
+                className={`bento-card project-card cinematic-project-card project-card-${index + 1}`}
+                style={{ "--deck-index": index } as CSSProperties}
               >
-                <div>
+                <div className="project-card-lead">
+                  <p className="project-count">0{index + 1}</p>
                   <p className="card-label">{project.eyebrow}</p>
                   <h3>{project.title}</h3>
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                  >
+                    Visit live project
+                  </a>
+                </div>
+
+                <div className="project-card-body">
                   <div className="project-meta">
                     <div>
                       <span>Problem</span>
@@ -225,21 +240,12 @@ export default function Home() {
                       <p>{project.depth}</p>
                     </div>
                   </div>
-                </div>
-                <div className="project-footer">
-                  <ul className="pill-list" aria-label={`${project.title} stack`}>
+
+                  <ul className="pill-list project-stack" aria-label={`${project.title} stack`}>
                     {project.stack.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link"
-                  >
-                    Visit live project
-                  </a>
                 </div>
               </article>
             ))}
