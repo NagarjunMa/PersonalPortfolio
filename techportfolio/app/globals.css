@@ -566,11 +566,40 @@ a {
   grid-template-columns: repeat(6, 1fr);
 }
 
+.project-deck-scroll {
+  height: 300vh;
+  margin-top: 16px;
+  position: relative;
+}
+
+.project-deck-sticky {
+  align-items: start;
+  display: grid;
+  min-height: calc(100vh - 92px);
+  padding-top: 24px;
+  position: sticky;
+  top: 46px;
+}
+
 .project-deck {
   display: grid;
+  height: min(620px, calc(100vh - 170px));
+  min-height: 500px;
+  perspective: 1400px;
+  perspective-origin: 50% 28%;
+  position: relative;
+}
+
+.project-deck-static {
   gap: 36px;
-  perspective: 1200px;
-  perspective-origin: 50% 20%;
+  height: auto;
+  min-height: 0;
+}
+
+.project-deck-static .cinematic-project-card {
+  inset: auto;
+  min-height: 430px;
+  position: relative;
 }
 
 .project-card {
@@ -579,7 +608,7 @@ a {
   justify-content: space-between;
   min-height: 520px;
   padding: 24px;
-  will-change: transform;
+  will-change: transform, opacity, filter;
 }
 
 .project-card-1 {
@@ -599,16 +628,12 @@ a {
   display: grid;
   gap: 28px;
   grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
-  min-height: 430px;
+  inset: 0;
+  min-height: 0;
   padding: 34px;
-  position: relative;
-  transform: translateY(0);
+  position: absolute;
+  transform-style: preserve-3d;
   transform-origin: 50% 0%;
-  transition: transform 220ms ease, box-shadow 220ms ease;
-}
-
-.cinematic-project-card:hover {
-  transform: translateY(-4px);
 }
 
 .cinematic-project-card::after {
@@ -633,6 +658,19 @@ a {
   align-content: start;
   display: grid;
   grid-template-rows: auto auto auto 1fr;
+}
+
+.project-deck-progress {
+  align-items: center;
+  color: var(--muted-ink);
+  display: flex;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.66rem;
+  font-weight: 850;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
 }
 
 .project-count {

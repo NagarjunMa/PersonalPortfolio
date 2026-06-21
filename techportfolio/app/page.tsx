@@ -1,6 +1,6 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
 import PortfolioStage from "./components/PortfolioStage";
+import ProjectDeck from "./components/ProjectDeck";
 
 const projects = [
   {
@@ -203,53 +203,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="project-deck">
-            {projects.map((project, index) => (
-              <article
-                key={project.title}
-                data-reveal
-                className={`bento-card project-card cinematic-project-card project-card-${index + 1}`}
-                style={{ "--deck-index": index } as CSSProperties}
-              >
-                <div className="project-card-lead">
-                  <p className="project-count">0{index + 1}</p>
-                  <p className="card-label">{project.eyebrow}</p>
-                  <h3>{project.title}</h3>
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link"
-                  >
-                    Visit live project
-                  </a>
-                </div>
-
-                <div className="project-card-body">
-                  <div className="project-meta">
-                    <div>
-                      <span>Problem</span>
-                      <p>{project.problem}</p>
-                    </div>
-                    <div>
-                      <span>Built</span>
-                      <p>{project.built}</p>
-                    </div>
-                    <div>
-                      <span>Technical depth</span>
-                      <p>{project.depth}</p>
-                    </div>
-                  </div>
-
-                  <ul className="pill-list project-stack" aria-label={`${project.title} stack`}>
-                    {project.stack.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
-          </div>
+          <ProjectDeck projects={projects} />
         </div>
       </section>
 

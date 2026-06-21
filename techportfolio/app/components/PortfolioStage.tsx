@@ -119,7 +119,7 @@ export default function PortfolioStage({ children }: PortfolioStageProps) {
         },
       });
 
-      const hoverCards = q(".project-card, .timeline-card, .writing-card, .side-card, .contact-card");
+      const hoverCards = q(".timeline-card, .writing-card, .side-card, .contact-card");
       hoverCards.forEach((card) => {
         const enter = () => {
           gsap.to(card, {
