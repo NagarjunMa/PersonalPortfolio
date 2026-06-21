@@ -451,7 +451,7 @@ a {
   align-self: start;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
   grid-column: span 4;
   height: fit-content;
   justify-content: flex-start;
@@ -468,6 +468,10 @@ a {
   object-fit: cover;
   width: 100%;
   will-change: transform;
+}
+
+.portrait-location {
+  padding: 2px 0 4px;
 }
 
 .card-label {

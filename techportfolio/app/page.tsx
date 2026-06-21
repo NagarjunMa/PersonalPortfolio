@@ -166,7 +166,7 @@ export default function Home() {
               priority
               className="portrait-image"
             />
-            <div>
+            <div className="portrait-location">
               <p className="card-label">Based in the US</p>
               <p className="card-title">New York, NY. Open to relocation.</p>
             </div>
