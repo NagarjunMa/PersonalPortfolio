@@ -574,7 +574,9 @@ a {
 
 .project-deck-sticky {
   align-items: start;
+  align-content: start;
   display: grid;
+  gap: 12px;
   min-height: calc(100vh - 92px);
   padding-top: 24px;
   position: sticky;
@@ -583,8 +585,8 @@ a {
 
 .project-deck {
   display: grid;
-  height: min(620px, calc(100vh - 170px));
-  min-height: 500px;
+  height: min(560px, calc(100vh - 260px));
+  min-height: 480px;
   perspective: 1400px;
   perspective-origin: 50% 28%;
   position: relative;
@@ -669,7 +671,6 @@ a {
   font-weight: 850;
   justify-content: space-between;
   letter-spacing: 0.08em;
-  margin-bottom: 12px;
   text-transform: uppercase;
 }
 
