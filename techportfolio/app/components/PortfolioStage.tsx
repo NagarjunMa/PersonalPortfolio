@@ -45,11 +45,10 @@ export default function PortfolioStage({ children }: PortfolioStageProps) {
       });
 
       intro
-        .fromTo(q(".hero-identity"), { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.5 })
-        .fromTo(q(".hero-copy .kicker"), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.55 }, "-=0.32")
-        .fromTo(q(".hero-title"), { autoAlpha: 0, y: 34, scale: 0.985 }, { autoAlpha: 1, y: 0, scale: 1 }, "-=0.2")
+        .fromTo(q(".hero-title"), { autoAlpha: 0, y: 34, scale: 0.985 }, { autoAlpha: 1, y: 0, scale: 1 })
         .fromTo(q(".hero-title span"), { autoAlpha: 0, x: 18 }, { autoAlpha: 1, x: 0, duration: 0.75 }, "-=0.65")
         .fromTo(q(".hero-lede"), { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7 }, "-=0.45")
+        .fromTo(q(".hero-role-line"), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55 }, "-=0.42")
         .fromTo(q(".hero-actions .button"), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.55 }, "-=0.35")
         .fromTo(q(".portrait-card"), { autoAlpha: 0, y: 38, scale: 0.965 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.05 }, "-=0.85");
 

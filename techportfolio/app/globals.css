@@ -342,15 +342,6 @@ a {
   text-transform: uppercase;
 }
 
-.hero-identity {
-  color: var(--clay);
-  font-family: 'Boska', serif;
-  font-size: clamp(1.06rem, 1.35vw, 1.32rem);
-  font-style: italic;
-  line-height: 1;
-  margin-bottom: 14px;
-}
-
 .hero-title,
 .section-heading h2,
 .contact-title {
@@ -361,9 +352,9 @@ a {
 }
 
 .hero-title {
-  font-size: clamp(1.72rem, 2.62vw, 2.68rem);
-  line-height: 1.1;
-  max-width: 690px;
+  font-size: clamp(3rem, 5.2vw, 5.45rem);
+  line-height: 0.96;
+  max-width: 780px;
 }
 
 .hero-title span,
@@ -378,10 +369,20 @@ a {
 
 .hero-lede {
   color: var(--charcoal);
-  font-size: clamp(1rem, 1.34vw, 1.16rem);
+  font-size: clamp(1.08rem, 1.48vw, 1.32rem);
   line-height: 1.52;
-  max-width: 760px;
+  max-width: 720px;
   margin-top: 26px;
+}
+
+.hero-role-line {
+  color: var(--muted-ink);
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-top: 18px;
+  text-transform: uppercase;
 }
 
 .hero-proof-grid {
@@ -1357,20 +1358,21 @@ a {
     padding: 18px;
   }
 
-  .hero-identity {
-    font-size: 1rem;
-    margin-bottom: 12px;
-  }
-
   .hero-title {
-    font-size: clamp(1.14rem, 4.72vw, 1.42rem);
-    line-height: 1.13;
+    font-size: clamp(2.48rem, 13vw, 3.45rem);
+    line-height: 0.96;
   }
 
   .hero-lede {
-    font-size: 0.82rem;
-    line-height: 1.44;
+    font-size: 0.94rem;
+    line-height: 1.48;
     margin-top: 18px;
+  }
+
+  .hero-role-line {
+    font-size: 0.6rem;
+    line-height: 1.4;
+    margin-top: 14px;
   }
 
   .hero-actions {

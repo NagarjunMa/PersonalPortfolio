@@ -220,19 +220,14 @@ export default function Home() {
       <section id="home" className="portfolio-section hero-section">
         <div className="shell hero-grid">
           <div className="hero-copy bento-card hero-main-card">
-            <p className="hero-identity">Nagarjun Mallesh</p>
-            <p className="kicker">Applied AI FDE / backend / cloud automation</p>
             <h1 className="hero-title">
-              I build backend, cloud, automation, and applied AI systems from messy workflows to{" "}
-              <span>production-grade software.</span>
+              Nagarjun <span>Mallesh.</span>
             </h1>
             <p className="hero-lede">
-              Across my work, the through line has been automation: improving
-              efficiency, reducing manual error, and turning operational
-              complexity into reliable software. I build across BIOS and OS
-              provisioning, cloud-native backend infrastructure, and RAG/LLM
-              workflows with the six AWS Well-Architected pillars in mind.
+              I build backend, cloud, automation, and applied AI systems from
+              messy workflows to production-grade software.
             </p>
+            <p className="hero-role-line">Seeking Applied AI FDE / backend / cloud automation roles</p>
             <div className="hero-actions" aria-label="Primary links">
               <a href="#work" className="button button-primary">
                 View systems
