@@ -21,9 +21,9 @@ export default function NavBar() {
   return (
     <header className="site-nav">
       <div className="site-nav-inner">
-        <button className="brand-mark" type="button" onClick={() => scrollTo("home")} aria-label="Go home">
+        <button className="brand-mark" type="button" onClick={() => scrollTo("home")} aria-label="Go home: Nagarjun Mallesh">
           <span aria-hidden="true">-&gt;</span>
-          <span>V1.0</span>
+          <span>Nagarjun</span>
         </button>
 
         <div className="social-rail" aria-label="Social links">

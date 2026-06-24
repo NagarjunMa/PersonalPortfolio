@@ -220,6 +220,7 @@ export default function Home() {
       <section id="home" className="portfolio-section hero-section">
         <div className="shell hero-grid">
           <div className="hero-copy bento-card hero-main-card">
+            <p className="hero-identity">Nagarjun Mallesh</p>
             <p className="kicker">Applied AI FDE / backend / cloud automation</p>
             <h1 className="hero-title">
               I build backend, cloud, automation, and applied AI systems from messy workflows to{" "}

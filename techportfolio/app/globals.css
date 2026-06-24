@@ -342,6 +342,15 @@ a {
   text-transform: uppercase;
 }
 
+.hero-identity {
+  color: var(--clay);
+  font-family: 'Boska', serif;
+  font-size: clamp(1.06rem, 1.35vw, 1.32rem);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
 .hero-title,
 .section-heading h2,
 .contact-title {
@@ -1346,6 +1355,11 @@ a {
 
   .hero-main-card {
     padding: 18px;
+  }
+
+  .hero-identity {
+    font-size: 1rem;
+    margin-bottom: 12px;
   }
 
   .hero-title {
