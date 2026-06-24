@@ -352,9 +352,9 @@ a {
 }
 
 .hero-title {
-  font-size: clamp(2.35rem, 3.75vw, 3.9rem);
-  line-height: 1.04;
-  max-width: 840px;
+  font-size: clamp(2rem, 3.12vw, 3.2rem);
+  line-height: 1.07;
+  max-width: 760px;
 }
 
 .hero-title span,
@@ -1349,7 +1349,7 @@ a {
   }
 
   .hero-title {
-    font-size: clamp(1.42rem, 6.1vw, 1.82rem);
+    font-size: clamp(1.24rem, 5.25vw, 1.58rem);
     line-height: 1.1;
   }
 
