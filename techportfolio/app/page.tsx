@@ -1,6 +1,46 @@
 import Image from "next/image";
+import type { IconType } from "react-icons";
+import {
+  SiAmazonapigateway,
+  SiAmazoncloudwatch,
+  SiAmazondynamodb,
+  SiAmazonec2,
+  SiAmazonrds,
+  SiAmazons3,
+  SiAmazonwebservices,
+  SiApachekafka,
+  SiClaude,
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiGo,
+  SiHuggingface,
+  SiJavascript,
+  SiMongodb,
+  SiNodedotjs,
+  SiOpenai,
+  SiOpenjdk,
+  SiPostgresql,
+  SiPython,
+  SiRedis,
+  SiSpringboot,
+  SiTerraform,
+  SiTypescript,
+} from "react-icons/si";
+import { TbApi, TbBinaryTree, TbBrain, TbCloudCog, TbDatabase, TbRoute, TbTerminal2 } from "react-icons/tb";
 import PortfolioStage from "./components/PortfolioStage";
 import ProjectDeck from "./components/ProjectDeck";
+
+type StackItem = {
+  name: string;
+  icon: IconType;
+};
+
+type StackGroup = {
+  title: string;
+  icon: IconType;
+  items: StackItem[];
+};
 
 const projects = [
   {
@@ -68,26 +108,70 @@ const engineeringSpectrum = [
   },
 ];
 
-const stackGroups = [
+const stackGroups: StackGroup[] = [
   {
-    title: "Languages & runtimes",
-    items: ["Python", "TypeScript", "JavaScript", "Java", "Go", "Bash", "PowerShell"],
+    title: "Languages",
+    icon: SiPython,
+    items: [
+      { name: "Python", icon: SiPython },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "Java", icon: SiOpenjdk },
+      { name: "Go", icon: SiGo },
+      { name: "Bash", icon: TbTerminal2 },
+      { name: "PowerShell", icon: TbTerminal2 },
+    ],
   },
   {
-    title: "Backend & APIs",
-    items: ["FastAPI", "Node.js", "Express", "Spring Boot", "REST APIs", "microservices"],
+    title: "Backend",
+    icon: TbApi,
+    items: [
+      { name: "FastAPI", icon: SiFastapi },
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Express", icon: SiExpress },
+      { name: "Spring Boot", icon: SiSpringboot },
+      { name: "REST APIs", icon: TbApi },
+      { name: "microservices", icon: TbRoute },
+    ],
   },
   {
-    title: "Cloud & infrastructure",
-    items: ["AWS Lambda", "EC2", "S3", "API Gateway", "RDS", "CloudWatch", "EventBridge", "Terraform", "Docker"],
+    title: "Cloud infra",
+    icon: TbCloudCog,
+    items: [
+      { name: "AWS Lambda", icon: SiAmazonwebservices },
+      { name: "EC2", icon: SiAmazonec2 },
+      { name: "S3", icon: SiAmazons3 },
+      { name: "API Gateway", icon: SiAmazonapigateway },
+      { name: "RDS", icon: SiAmazonrds },
+      { name: "CloudWatch", icon: SiAmazoncloudwatch },
+      { name: "EventBridge", icon: SiAmazonwebservices },
+      { name: "Terraform", icon: SiTerraform },
+      { name: "Docker", icon: SiDocker },
+    ],
   },
   {
-    title: "Data & messaging",
-    items: ["PostgreSQL", "MongoDB", "Redis", "DynamoDB", "Kafka"],
+    title: "Data",
+    icon: TbDatabase,
+    items: [
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "Redis", icon: SiRedis },
+      { name: "DynamoDB", icon: SiAmazondynamodb },
+      { name: "Kafka", icon: SiApachekafka },
+    ],
   },
   {
     title: "AI systems",
-    items: ["RAG", "AWS Bedrock", "Claude", "Hugging Face", "FAISS", "Sentence Transformers", "RAGAS"],
+    icon: TbBrain,
+    items: [
+      { name: "RAG", icon: TbBinaryTree },
+      { name: "AWS Bedrock", icon: SiAmazonwebservices },
+      { name: "Claude", icon: SiClaude },
+      { name: "Hugging Face", icon: SiHuggingface },
+      { name: "FAISS", icon: TbDatabase },
+      { name: "Sentence Transformers", icon: SiHuggingface },
+      { name: "RAGAS", icon: SiOpenai },
+    ],
   },
 ];
 
@@ -142,10 +226,11 @@ export default function Home() {
               <span>production-grade software.</span>
             </h1>
             <p className="hero-lede">
-              My work spans BIOS and OS provisioning at enterprise scale,
-              cloud-native backend infrastructure, and RAG/LLM systems for real
-              business workflows. I focus on systems that are measurable,
-              operable, and useful before they are impressive.
+              Across my work, the through line has been automation: improving
+              efficiency, reducing manual error, and turning operational
+              complexity into reliable software. I build across BIOS and OS
+              provisioning, cloud-native backend infrastructure, and RAG/LLM
+              workflows with the six AWS Well-Architected pillars in mind.
             </p>
             <div className="hero-actions" aria-label="Primary links">
               <a href="#work" className="button button-primary">
@@ -220,16 +305,32 @@ export default function Home() {
           </div>
 
           <div className="stack-groups">
-            {stackGroups.map((group) => (
-              <article key={group.title} className="bento-card stack-group" data-reveal>
-                <h3>{group.title}</h3>
-                <ul className="pill-list">
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+            {stackGroups.map((group) => {
+              const GroupIcon = group.icon;
+
+              return (
+                <article key={group.title} className="bento-card stack-group" data-reveal>
+                  <div className="stack-title-row">
+                    <span className="stack-icon" aria-hidden="true">
+                      <GroupIcon />
+                    </span>
+                    <h3>{group.title}</h3>
+                  </div>
+                  <ul className="pill-list stack-pill-list">
+                    {group.items.map((item) => {
+                      const ItemIcon = item.icon;
+
+                      return (
+                        <li key={item.name}>
+                          <ItemIcon className="stack-pill-icon" aria-hidden="true" />
+                          {item.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -911,10 +911,17 @@ a {
 
 .case-card h3,
 .stack-group h3 {
-  font-size: clamp(1.28rem, 2vw, 1.75rem);
   font-weight: 850;
   line-height: 1.04;
   margin-bottom: 14px;
+}
+
+.case-card h3 {
+  font-size: clamp(1.28rem, 2vw, 1.75rem);
+}
+
+.stack-group h3 {
+  font-size: clamp(1.18rem, 1.65vw, 1.48rem);
 }
 
 .case-card p {
@@ -925,14 +932,88 @@ a {
 
 .stack-groups {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
 }
 
 .stack-group {
-  min-height: 250px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(255, 248, 236, 0.18)),
+    rgba(255, 248, 236, 0.48);
+  border-color: rgba(255, 255, 255, 0.52);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(25, 24, 30, 0.08),
+    0 22px 56px rgba(25, 24, 30, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 286px;
+  overflow: hidden;
+  padding: 20px;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  backdrop-filter: blur(24px) saturate(1.2);
 }
 
-.stack-group .pill-list li {
-  background: rgba(255, 248, 236, 0.58);
+.stack-title-row {
+  align-items: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  min-height: 58px;
+}
+
+.stack-icon {
+  align-items: center;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(255, 248, 236, 0.2)),
+    rgba(255, 248, 236, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(25, 24, 30, 0.08),
+    0 10px 26px rgba(25, 24, 30, 0.07);
+  color: var(--charcoal);
+  display: inline-flex;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.stack-icon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.stack-title-row h3 {
+  margin: 0;
+}
+
+.stack-pill-list {
+  align-content: flex-start;
+  gap: 8px;
+}
+
+.stack-pill-list li {
+  align-items: center;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(255, 248, 236, 0.25)),
+    rgba(255, 248, 236, 0.44);
+  border-color: rgba(25, 24, 30, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 8px 20px rgba(25, 24, 30, 0.04);
+  display: inline-flex;
+  gap: 7px;
+  min-height: 34px;
+  padding: 8px 11px;
+}
+
+.stack-pill-icon {
+  color: var(--muted-ink);
+  flex: 0 0 auto;
+  height: 14px;
+  width: 14px;
 }
 
 .timeline-card {
@@ -1478,10 +1559,38 @@ a {
 
   .stack-group {
     min-height: 0;
+    padding: 18px;
+  }
+
+  .stack-title-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .stack-icon {
+    height: 34px;
+    width: 34px;
+  }
+
+  .stack-icon svg {
+    height: 16px;
+    width: 16px;
   }
 
   .stack-group h3 {
     font-size: 1.35rem;
+  }
+
+  .stack-pill-list li {
+    font-size: 0.64rem;
+    gap: 6px;
+    min-height: 31px;
+    padding: 7px 9px;
+  }
+
+  .stack-pill-icon {
+    height: 13px;
+    width: 13px;
   }
 
   .project-footer {
