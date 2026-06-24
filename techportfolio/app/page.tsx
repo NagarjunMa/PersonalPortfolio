@@ -377,11 +377,10 @@ export default function Home() {
             <article className="bento-card about-card" data-reveal>
               <p className="about-index">(02)</p>
               <p className="about-statement">
-                My work has moved across enterprise automation, cloud backend
-                systems, and applied AI products. I have worked on provisioning
-                workflows, service migrations, infrastructure-backed APIs, and
-                LLM-powered systems where correctness, usability, and
-                operational clarity matter.
+                I moved toward applied AI for the same reason I kept building
+                automation: to reduce manual error, make complex workflows
+                easier to operate, and turn emerging capability into software
+                teams can trust in production.
               </p>
             </article>
 
