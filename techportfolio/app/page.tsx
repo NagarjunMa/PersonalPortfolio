@@ -7,11 +7,13 @@ const projects = [
     title: "Visual Learning",
     eyebrow: "Interactive systems education",
     problem:
-      "System design is often taught through static diagrams that hide runtime behavior.",
+      "System design topics are often explained with static diagrams that hide runtime behavior, failure modes, and the tradeoffs engineers actually debug.",
     built:
-      "A client-side simulator with 15 interactive modules across databases, Kafka, TCP, rate limiting, transformer inference, sharding, and scaling patterns.",
+      "A client-side simulator with interactive modules across databases, Kafka, TCP, rate limiting, transformer inference, sharding, and scaling patterns.",
     depth:
-      "Typed simulation engines, SVG visualizations, live metrics, state-driven controls, and module-level architecture for adding new system internals.",
+      "Typed simulation engines, state-driven controls, SVG visualizations, live metrics, and module-level architecture for adding new system internals.",
+    impact:
+      "Turns abstract infrastructure concepts into inspectable systems for engineers who learn better by watching behavior unfold.",
     stack: ["React", "TypeScript", "Vite", "Tailwind", "Framer Motion", "SVG"],
     href: "https://visual-study.vercel.app",
   },
@@ -19,11 +21,13 @@ const projects = [
     title: "Prism Pro",
     eyebrow: "Resume intelligence platform",
     problem:
-      "Resume tools either give generic advice or fabricate improvements candidates cannot defend.",
+      "Resume tools either give generic advice or fabricate improvements candidates cannot defend in interviews.",
     built:
       "A FastAPI and Next.js platform for resume parsing, recruiter-style evaluation, JD tailoring, versioning, preview, and country-aware PDF export.",
     depth:
       "Schema-constrained LLM responses, hallucination guards, ATS simulation, Supabase auth/storage, credit accounting, and Playwright PDF rendering.",
+    impact:
+      "Helps candidates improve documents with evidence they can explain, not model-generated polish that collapses under scrutiny.",
     stack: ["FastAPI", "SQLAlchemy", "Pydantic", "OpenAI", "Next.js", "Supabase"],
     href: "https://prismpro.live",
   },
@@ -36,70 +40,72 @@ const projects = [
       "A Chrome MV3 extension and Next.js app that generate grounded LinkedIn notes, cold emails, and InMails from profile context, resume data, and user intent.",
     depth:
       "Prompt guardrails, sanitization, AI-fingerprint stripping, feedback loops, style learning, rate limits, Supabase auth, and Anthropic Claude integration.",
+    impact:
+      "Keeps personalization grounded in visible context while giving users faster drafts they can still review and own.",
     stack: ["Next.js", "TypeScript", "Chrome MV3", "Supabase", "Claude", "Zod"],
     href: "https://aletheia.live",
   },
 ];
 
-const caseStudies = [
+const engineeringSpectrum = [
   {
-    title: "Reliable LLM workflows",
+    title: "Enterprise Provisioning & Automation",
     text:
-      "Built generation systems where the hard part is not calling a model, but constraining the workflow: typed schemas, prompt versions, safety filters, hallucination guards, credit reservations, rate limits, and feedback metadata.",
-    proof: ["Prism Pro", "Aletheia", "OpenAI", "Claude", "Zod", "Pydantic"],
+      "Automated BIOS configuration, OS deployment, and HP hardware provisioning workflows, reducing manual setup from days to minutes and supporting enterprise device rollout at scale.",
+    proof: ["PowerShell", "React", "Node.js", "BIOS config", "OS deployment", "100K+ machines"],
   },
   {
-    title: "Making invisible systems visible",
+    title: "Cloud Backend Infrastructure",
     text:
-      "Modeled system-design and infrastructure behavior as interactive state machines: broker failure, leader election, rate-limit algorithms, LSM writes, B+ tree splits, transformer inference, and sharding tradeoffs.",
-    proof: ["Visual Learning", "simulation engines", "SVG", "typed state"],
+      "Built hybrid AWS/GCP storage flows, event-driven processing, RDS-backed schemas, containerized Node.js services, and CloudWatch observability for production backend systems.",
+    proof: ["AWS/GCP", "Lambda", "EventBridge", "RDS Multi-AZ", "Docker/ECR", "Terraform"],
   },
   {
-    title: "Productizing ambiguous workflows",
+    title: "Applied AI & RAG Systems",
     text:
-      "Turned open-ended user problems into complete product flows: upload, parse, evaluate, rewrite, accept changes, export PDFs, browser-extension auth, profile context extraction, and production feedback loops.",
-    proof: ["FastAPI", "Next.js", "Supabase", "Playwright", "Chrome extension"],
+      "Designed RAG and LLM workflows with AWS Bedrock, hybrid retrieval, RAGAS evaluation, prompt templates, and text normalization for client-facing business workflows.",
+    proof: ["Bedrock", "Claude", "LangChain", "RAGAS", "FAISS", "Sentence Transformers"],
   },
 ];
 
 const stackGroups = [
   {
     title: "Languages & runtimes",
-    items: ["Python", "TypeScript", "JavaScript", "Java", "Node.js"],
+    items: ["Python", "TypeScript", "JavaScript", "Java", "Go", "Bash", "PowerShell"],
   },
   {
     title: "Backend & APIs",
-    items: ["FastAPI", "Spring Boot", "SQLAlchemy", "Pydantic", "REST APIs", "auth", "rate limits"],
+    items: ["FastAPI", "Node.js", "Express", "Spring Boot", "REST APIs", "microservices"],
+  },
+  {
+    title: "Cloud & infrastructure",
+    items: ["AWS Lambda", "EC2", "S3", "API Gateway", "RDS", "CloudWatch", "EventBridge", "Terraform", "Docker"],
+  },
+  {
+    title: "Data & messaging",
+    items: ["PostgreSQL", "MongoDB", "Redis", "DynamoDB", "Kafka"],
   },
   {
     title: "AI systems",
-    items: ["OpenAI", "Anthropic Claude", "RAG", "prompt guardrails", "eval metadata", "hallucination controls"],
-  },
-  {
-    title: "Cloud & data",
-    items: ["AWS", "Supabase", "PostgreSQL", "Redis", "MongoDB", "DynamoDB", "Docker", "Terraform"],
-  },
-  {
-    title: "Frontend & product",
-    items: ["Next.js", "React", "Vite", "Chrome extensions", "Tailwind", "Playwright", "Framer Motion"],
+    items: ["RAG", "AWS Bedrock", "Claude", "Hugging Face", "FAISS", "Sentence Transformers", "RAGAS"],
   },
 ];
 
 const timeline = [
   {
     year: "2025",
-    title: "AI, RAG, and automation systems",
-    text: "Shipping RAG, LLM text-normalization, FastAPI, AWS Bedrock, and infrastructure automation workflows at ML Technologies.",
+    title: "Applied AI and RAG systems",
+    text: "Designed Bedrock RAG pipelines, hybrid retrieval, RAGAS evaluation, prompt templates, and LLM text normalization workflows at ML Technologies.",
   },
   {
     year: "2024",
     title: "Cloud backend and infrastructure",
-    text: "Built AWS/GCP storage services, Node.js APIs, RDS integrations, Terraform, Docker, and CloudWatch monitoring for Keelworks.",
+    text: "Built AWS/GCP storage services, RDS Multi-AZ schemas, Lambda/EventBridge processing, Dockerized Node.js services, and CloudWatch observability.",
   },
   {
     year: "2019-2022",
-    title: "Enterprise software engineering",
-    text: "Automated HP provisioning workflows and migrated banking services toward Spring Boot microservices with Kafka.",
+    title: "Enterprise automation and services",
+    text: "Automated BIOS configuration, OS deployment, provisioning dashboards, and Spring Boot/Kafka service migration work across enterprise environments.",
   },
 ];
 
@@ -130,17 +136,16 @@ export default function Home() {
       <section id="home" className="portfolio-section hero-section">
         <div className="shell hero-grid">
           <div className="hero-copy bento-card hero-main-card">
-            <p className="kicker">Full-stack engineer / applied AI / cloud systems</p>
+            <p className="kicker">Applied AI FDE / backend / cloud automation</p>
             <h1 className="hero-title">
-              I build applied AI, backend, and cloud systems from ambiguity to{" "}
-              <span>production.</span>
+              I build backend, cloud, automation, and applied AI systems from messy workflows to{" "}
+              <span>production-grade software.</span>
             </h1>
             <p className="hero-lede">
-              My work sits across Python, TypeScript, FastAPI, Next.js, Supabase,
-              AWS, Docker, Terraform, RAG, LLM workflows, and browser automation.
-              I focus on grounded systems: reliable APIs, clear architecture,
-              safe AI pipelines, and interfaces that make complex workflows
-              understandable.
+              My work spans BIOS and OS provisioning at enterprise scale,
+              cloud-native backend infrastructure, and RAG/LLM systems for real
+              business workflows. I focus on systems that are measurable,
+              operable, and useful before they are impressive.
             </p>
             <div className="hero-actions" aria-label="Primary links">
               <a href="#work" className="button button-primary">
@@ -173,20 +178,20 @@ export default function Home() {
           </div>
 
           <div className="hero-proof-grid" aria-label="Engineering focus">
-            <span>AI workflow systems</span>
-            <span>Backend/API design</span>
-            <span>Full-stack product engineering</span>
-            <span>Cloud automation</span>
+            <span>Enterprise automation</span>
+            <span>Backend/cloud systems</span>
+            <span>Applied AI/RAG</span>
+            <span>Product engineering</span>
           </div>
         </div>
       </section>
 
       <section className="ticker-strip" aria-label="Portfolio focus">
         <span>Available for thoughtful engineering work</span>
+        <span>Enterprise automation</span>
         <span>Applied AI</span>
         <span>Backend</span>
         <span>Cloud systems</span>
-        <span>FDE / product engineering</span>
       </section>
 
       <section id="work" className="portfolio-section">
@@ -197,9 +202,9 @@ export default function Home() {
               Systems I have <span>built.</span>
             </h2>
             <p className="section-intro">
-              Three shipped products that show the range: simulation engines,
-              resume intelligence, and AI outreach automation. The common thread
-              is turning complex workflows into usable, defensible systems.
+              Three live systems that extend the same engineering pattern:
+              clarify the workflow, define the system boundary, and make the
+              result usable enough for people to trust.
             </p>
           </div>
 
@@ -207,17 +212,42 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="stack" className="portfolio-section">
+        <div className="shell">
+          <div className="section-heading compact-heading" data-reveal>
+            <p className="kicker">Technical stack</p>
+            <h2>Tools and systems I work with.</h2>
+          </div>
+
+          <div className="stack-groups">
+            {stackGroups.map((group) => (
+              <article key={group.title} className="bento-card stack-group" data-reveal>
+                <h3>{group.title}</h3>
+                <ul className="pill-list">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="cases" className="portfolio-section">
         <div className="shell">
           <div className="section-heading compact-heading" data-reveal>
-            <p className="kicker">Case studies</p>
-            <h2>
-              Engineering judgment, not just <span>demos.</span>
-            </h2>
+            <p className="kicker">Engineering spectrum</p>
+            <h2>Enterprise systems to applied AI.</h2>
+            <p className="section-intro">
+              The throughline is not a single framework. It is building reliable
+              software around messy operational workflows, infrastructure
+              constraints, and emerging AI capabilities.
+            </p>
           </div>
 
           <div className="case-grid">
-            {caseStudies.map((study, index) => (
+            {engineeringSpectrum.map((study, index) => (
               <article key={study.title} className="bento-card case-card" data-reveal>
                 <p className="case-index">0{index + 1}</p>
                 <h3>{study.title}</h3>
@@ -238,7 +268,7 @@ export default function Home() {
           <div className="section-heading sticky-heading" data-reveal>
             <p className="kicker">Engineering arc</p>
             <h2>
-              Useful before impressive. Reliable before <span>clever.</span>
+              Useful before impressive. Operable before <span>clever.</span>
             </h2>
           </div>
 
@@ -246,9 +276,11 @@ export default function Home() {
             <article className="bento-card about-card" data-reveal>
               <p className="about-index">(02)</p>
               <p className="about-statement">
-                I like the work between possibility and production: clarifying
-                messy requirements, choosing the right technical boundary, and
-                building systems that teams can operate without guesswork.
+                My work has moved across enterprise automation, cloud backend
+                systems, and applied AI products. I have worked on provisioning
+                workflows, service migrations, infrastructure-backed APIs, and
+                LLM-powered systems where correctness, usability, and
+                operational clarity matter.
               </p>
             </article>
 
@@ -265,41 +297,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className="portfolio-section">
-        <div className="shell">
-          <div className="section-heading compact-heading" data-reveal>
-            <p className="kicker">Stack</p>
-            <h2>
-              Tools I use to <span>ship.</span>
-            </h2>
-          </div>
-
-          <div className="stack-groups">
-            {stackGroups.map((group) => (
-              <article key={group.title} className="bento-card stack-group" data-reveal>
-                <h3>{group.title}</h3>
-                <ul className="pill-list">
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="blog" className="portfolio-section writing-section">
         <div className="shell writing-grid">
           <div className="bento-card writing-feature" data-reveal>
-            <p className="kicker">Technical writing</p>
+            <p className="kicker">Writing and learning</p>
             <h2>
-              Writing to make systems easier to <span>understand.</span>
+              Writing to clarify what I am <span>learning.</span>
             </h2>
             <p>
-              I write and build visual explanations around document extraction,
-              LLM workflows, system design, developer tools, and the engineering
-              choices that make emerging technology approachable.
+              I write to clarify what I am learning and share practical notes
+              with other engineers. My writing explores backend systems, AI
+              workflows, automation, and the implementation tradeoffs I
+              encounter while building.
             </p>
             <div className="writing-actions">
               <a
@@ -349,16 +358,16 @@ export default function Home() {
           <div data-reveal>
             <p className="kicker">Contact</p>
             <h2 className="contact-title">
-              Available for full-stack, backend, AI product, FDE, and cloud
-              systems roles.
+              Available for applied AI FDE, full-stack systems, backend, and
+              cloud automation roles.
             </h2>
           </div>
 
           <div className="bento-card contact-card" data-reveal>
             <p>
               Best fit: teams that need someone to translate ambiguous technical
-              problems into reliable APIs, AI workflows, product surfaces, and
-              infrastructure automation.
+              problems into reliable APIs, applied AI workflows, product
+              surfaces, and infrastructure automation.
             </p>
             <div className="contact-links">
               <a href="mailto:nagarjunmallesh@gmail.com">Email</a>

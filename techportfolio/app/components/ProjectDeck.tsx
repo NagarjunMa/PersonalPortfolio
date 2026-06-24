@@ -10,6 +10,7 @@ type Project = {
   problem: string;
   built: string;
   depth: string;
+  impact: string;
   stack: string[];
   href: string;
 };
@@ -65,6 +66,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <span>Technical depth</span>
             <p>{project.depth}</p>
           </div>
+          <div>
+            <span>Why it matters</span>
+            <p>{project.impact}</p>
+          </div>
         </div>
 
         <ul className="pill-list project-stack" aria-label={`${project.title} stack`}>
@@ -97,11 +102,11 @@ function AnimatedProjectCard({
   const isFirst = index === 0;
   const isLast = index === count - 1;
 
-  const y = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 0 : 96, 0, 0, isLast ? 0 : -96]);
-  const scale = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 1 : 0.92, 1, 1, isLast ? 1 : 0.94]);
+  const y = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 0 : 56, 0, 0, isLast ? 0 : -56]);
+  const scale = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 1 : 0.96, 1, 1, isLast ? 1 : 0.97]);
   const opacity = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 1 : 0, 1, 1, isLast ? 1 : 0]);
-  const rotateX = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 0 : 6, 0, 0, isLast ? 0 : -6]);
-  const blur = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 0 : 4, 0, 0, isLast ? 0 : 3]);
+  const rotateX = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 0 : 2, 0, 0, isLast ? 0 : -2]);
+  const blur = useTransform(progress, [enter, loaded, hold, exit], [isFirst ? 0 : 1.5, 0, 0, isLast ? 0 : 1]);
   const filter = useTransform(blur, (value) => `blur(${value}px)`);
 
   return (

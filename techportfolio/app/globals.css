@@ -352,9 +352,9 @@ a {
 }
 
 .hero-title {
-  font-size: clamp(2.8rem, 4.35vw, 4.35rem);
-  line-height: 1.02;
-  max-width: 760px;
+  font-size: clamp(2.35rem, 3.75vw, 3.9rem);
+  line-height: 1.04;
+  max-width: 840px;
 }
 
 .hero-title span,
@@ -369,7 +369,7 @@ a {
 
 .hero-lede {
   color: var(--charcoal);
-  font-size: clamp(1.05rem, 1.55vw, 1.28rem);
+  font-size: clamp(1rem, 1.34vw, 1.16rem);
   line-height: 1.52;
   max-width: 760px;
   margin-top: 26px;
@@ -530,13 +530,13 @@ a {
 
 .section-heading h2,
 .contact-title {
-  font-size: clamp(2.15rem, 4.2vw, 4.9rem);
-  line-height: 0.96;
+  font-size: clamp(2rem, 3.65vw, 4.15rem);
+  line-height: 1;
 }
 
 .about-grid .section-heading h2 {
-  font-size: clamp(2.05rem, 3.6vw, 4.3rem);
-  line-height: 0.98;
+  font-size: clamp(1.95rem, 3.2vw, 3.65rem);
+  line-height: 1;
 }
 
 .compact-heading {
@@ -585,8 +585,8 @@ a {
 
 .project-deck {
   display: grid;
-  height: min(560px, calc(100vh - 260px));
-  min-height: 480px;
+  height: min(590px, calc(100vh - 230px));
+  min-height: 500px;
   perspective: 1400px;
   perspective-origin: 50% 28%;
   position: relative;
@@ -614,25 +614,25 @@ a {
 }
 
 .project-card-1 {
-  background: linear-gradient(145deg, rgba(255, 152, 125, 0.9), rgba(255, 248, 236, 0.82));
+  background: linear-gradient(145deg, rgba(255, 152, 125, 0.62), rgba(255, 248, 236, 0.88));
 }
 
 .project-card-2 {
-  background: linear-gradient(145deg, rgba(141, 173, 140, 0.92), rgba(255, 248, 236, 0.76));
+  background: linear-gradient(145deg, rgba(141, 173, 140, 0.68), rgba(255, 248, 236, 0.82));
 }
 
 .project-card-3 {
-  background: var(--charcoal);
+  background: linear-gradient(145deg, rgba(25, 24, 30, 0.94), rgba(25, 24, 30, 0.82));
   color: var(--paper);
 }
 
 .cinematic-project-card {
   display: grid;
-  gap: 28px;
-  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  gap: 24px;
+  grid-template-columns: minmax(250px, 0.64fr) minmax(0, 1.36fr);
   inset: 0;
   min-height: 0;
-  padding: 34px;
+  padding: 30px;
   position: absolute;
   transform-style: preserve-3d;
   transform-origin: 50% 0%;
@@ -677,25 +677,25 @@ a {
 .project-count {
   color: var(--clay);
   font-family: 'Boska', serif;
-  font-size: 3rem;
+  font-size: 2.55rem;
   font-style: italic;
   line-height: 0.85;
-  margin-bottom: 38px;
+  margin-bottom: 28px;
 }
 
 .project-card-body {
   display: grid;
-  gap: 22px;
+  gap: 16px;
 }
 
 .project-card h3,
 .timeline-card h3,
 .side-card h3 {
-  font-size: clamp(1.6rem, 3vw, 2.55rem);
+  font-size: clamp(1.45rem, 2.55vw, 2.25rem);
   font-weight: 850;
   letter-spacing: 0;
   line-height: 0.96;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .timeline-card h3 {
@@ -706,13 +706,13 @@ a {
 
 .project-meta {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   margin-top: 0;
 }
 
 .project-meta div {
   border-top: 1px solid currentColor;
-  padding-top: 12px;
+  padding-top: 9px;
 }
 
 .project-meta span {
@@ -722,8 +722,12 @@ a {
   font-size: 0.66rem;
   font-weight: 850;
   letter-spacing: 0.08em;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   text-transform: uppercase;
+}
+
+.project-meta p {
+  font-size: 0.93rem;
 }
 
 .project-card-3 .project-meta span,
@@ -1260,28 +1264,28 @@ a {
   }
 
   .hero-main-card {
-    padding: 20px;
+    padding: 18px;
   }
 
   .hero-title {
-    font-size: clamp(1.62rem, 7vw, 2.05rem);
-    line-height: 1.08;
+    font-size: clamp(1.42rem, 6.1vw, 1.82rem);
+    line-height: 1.1;
   }
 
   .hero-lede {
-    font-size: 0.9rem;
-    line-height: 1.46;
-    margin-top: 22px;
+    font-size: 0.82rem;
+    line-height: 1.44;
+    margin-top: 18px;
   }
 
   .hero-actions {
-    margin-top: 24px;
+    margin-top: 20px;
   }
 
   .hero-actions .button {
-    font-size: 0.72rem;
-    min-height: 38px;
-    padding: 0 16px;
+    font-size: 0.68rem;
+    min-height: 34px;
+    padding: 0 14px;
   }
 
   .hero-proof-grid {
@@ -1298,8 +1302,8 @@ a {
 
   .section-heading h2,
   .contact-title {
-    font-size: clamp(2.25rem, 11vw, 3.15rem);
-    line-height: 0.94;
+    font-size: clamp(1.9rem, 9.2vw, 2.65rem);
+    line-height: 1;
   }
 
   .section-intro {
@@ -1423,13 +1427,13 @@ a {
   }
 
   .cinematic-project-card {
-    gap: 20px;
-    padding: 18px;
+    gap: 16px;
+    padding: 16px;
   }
 
   .project-count {
-    font-size: 2.2rem;
-    margin-bottom: 18px;
+    font-size: 1.9rem;
+    margin-bottom: 14px;
   }
 
   .project-card-lead {
@@ -1439,7 +1443,7 @@ a {
   .project-card h3,
   .timeline-card h3,
   .side-card h3 {
-    font-size: clamp(1.45rem, 9vw, 2rem);
+    font-size: clamp(1.22rem, 7.2vw, 1.72rem);
     line-height: 1;
   }
 
@@ -1449,13 +1453,13 @@ a {
   .writing-feature p,
   .contact-card p,
   .case-card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.88rem;
+    line-height: 1.44;
   }
 
   .project-meta {
-    gap: 10px;
-    margin-top: 18px;
+    gap: 8px;
+    margin-top: 14px;
   }
 
   .project-meta div {
@@ -1468,8 +1472,16 @@ a {
   }
 
   .project-meta p {
-    font-size: 0.86rem;
-    line-height: 1.38;
+    font-size: 0.78rem;
+    line-height: 1.34;
+  }
+
+  .stack-group {
+    min-height: 0;
+  }
+
+  .stack-group h3 {
+    font-size: 1.35rem;
   }
 
   .project-footer {
